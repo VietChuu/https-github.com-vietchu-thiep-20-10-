@@ -24,7 +24,7 @@ window.CARD_CONFIG = {
   letterGreeting: "Gửi em — cô gái tuyệt vời nhất của anh,",
   letterParagraphs: [
     "Nhân ngày Phụ nữ Việt Nam 20/10, anh muốn gửi tới em ngàn lời yêu thương ngọt ngào nhất. Cảm ơn em vì đã đến bên anh, mang theo nụ cười ấm áp làm dịu đi mọi mệt mỏi và biến những ngày bình thường trở nên thật đặc biệt.",
-    "Với anh, em không chỉ là người yêu mà còn là bình yên, là động lực và là điều đẹp đẽ nhất mà anh may mắn có được. Chúc công chúa của anh ngày 20/10 và cả 365 ngày trong năm luôn rạng rỡ như hoa hướng dương, luôn vui vẻ, hạnh phúc và được yêu thương trọn vẹn.",
+    "Với anh, có em bên cạnh là điều bình yên và may mắn nhất. Chúc cô gái của anh ngày 20/10 và cả những ngày sau nữa lúc nào cũng vui vẻ, tươi tắn và hạnh phúc nhé.",
     "Dù thế giới ngoài kia có bận rộn thế nào, hãy nhớ rằng luôn có anh ở đây thương em, chiều chuộng và đồng hành cùng em qua mọi chặng đường. Yêu em rất nhiều!"
   ],
   letterClosing: "Trọn đời thương em,",
@@ -32,17 +32,17 @@ window.CARD_CONFIG = {
   // 4. Mini-game tương tác "Em có yêu anh không?"
   loveQuestionTitle: "Câu Hỏi Quan Trọng Ngày 20/10 😳",
   loveQuestionPrompt: "Trả lời thật lòng nha: Em có thương và yêu anh nhiều không?",
-  loveYesText: "Yêu anh nhất trên đời 💖",
+  loveYesText: "Thương anh nhất 💖",
   loveNoTexts: [
     "Hông thèm đâu 😜",
     "Ơ kìa, bấm nhầm hả? 🥺",
-    "Nút này bị hư rồi! 😭",
-    "Đừng bấm nút này mà 😤",
+    "Nút này bị liệt rồi! 😂",
+    "Đừng cố bấm nút này nữa 😤",
     "Bấm nút màu hồng bên kia kìa! 💕",
-    "Chạy đằng trời cũng không thoát đâu 🏃‍♂️💨",
-    "Thôi đừng dối lòng nữa 😘"
+    "Chạy đâu cho thoát 🏃‍♂️💨",
+    "Thôi nhận đi đừng ngại 😘"
   ],
-  loveSuccessMessage: "Anh biết ngay mà! Anh cũng yêu công chúa của anh nhiều gấp vạn lần! Hôm nay đi chơi anh chiều em hết nấc nha! 🥰💖💐",
+  loveSuccessMessage: "Biết ngay là không bấm nút kia được mà 😆 Cảm ơn em đã luôn ở bên anh. Hôm nay thích ăn gì, đi đâu cứ bảo anh nha! ❤️",
 
   // 5. Thư viện ảnh kỷ niệm Polaroid của 2 bạn
   galleryTitle: "Khoảnh Khắc Của Chúng Mình",
