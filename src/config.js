@@ -15,8 +15,8 @@ window.CARD_CONFIG = {
   loveStartLabel: "✨ Bên nhau từ ngày 25/03/2026 ✨",
   loveCounterTitle: "Hành Trình Bên Nhau Của Chúng Mình",
   loveCounterSubtitle: "Từng giây phút trôi qua bên em đều là những kỷ niệm vô giá",
-  coupleAvatarLeft: "assets/photos/1792466461944_2199372916196262329_2672750711596410923_h.jpg",
-  coupleAvatarRight: "assets/photos/1792466461969_2199372916196262329_2672750711596410923_h.jpg",
+  coupleAvatarLeft: "assets/photos/avatar-left.jpg",
+  coupleAvatarRight: "assets/photos/avatar-right.jpg",
 
   // 3. Tiêu đề & Nội dung bức thư
   envelopeTitle: "Gửi Người Con Gái Anh Thương",

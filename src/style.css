@@ -856,8 +856,8 @@ body {
 }
 
 .avatar-ring {
-  width: 86px;
-  height: 86px;
+  width: 112px;
+  height: 112px;
   border-radius: 50%;
   padding: 4px;
   background: linear-gradient(135deg, #ff4d6d, #ffb3c6);
@@ -869,7 +869,7 @@ body {
   height: 100%;
   border-radius: 50%;
   object-fit: cover;
-  object-position: center 75%;
+  object-position: center center;
   border: 3px solid #fff;
 }
 
