@@ -251,6 +251,12 @@
         <div id="love-yes-val" class="stat-value">Chưa bấm</div>
         <div id="love-dodge-sub" class="stat-sub">Mini-game nút chạy trốn</div>
       </div>
+
+      <div class="stat-card">
+        <div class="stat-label">🌟 Lọ Sao Tâm Sự</div>
+        <div id="jar-count-val" class="stat-value">0 lần bốc</div>
+        <div id="jar-latest-sub" class="stat-sub">Chưa bốc ngôi sao nào</div>
+      </div>
     </section>
 
     <!-- Highlighted Wheel Spins Panel -->
@@ -260,6 +266,16 @@
       </div>
       <div id="spin-list" class="spin-list">
         <div class="empty-state">Chưa có lượt quay nào. Khi cô ấy bấm QUAY trên thiệp, kết quả sẽ hiện ngay tại đây! ✨</div>
+      </div>
+    </section>
+
+    <!-- Highlighted Love Jar Stars Panel -->
+    <section class="panel">
+      <div class="panel-title">
+        <span>🌟 Các ngôi sao cô ấy đã bốc trong Lọ Sao Tâm Sự</span>
+      </div>
+      <div id="jar-list" class="spin-list">
+        <div class="empty-state">Chưa bốc ngôi sao nào trong Lọ Sao Tâm Sự.</div>
       </div>
     </section>
 
@@ -305,6 +321,7 @@
         const spins = visible.filter((e) => e.type === "spin_wheel");
         const opens = visible.filter((e) => e.type === "open_envelope");
         const yesClicks = visible.filter((e) => e.type === "click_love_yes");
+        const jarPicks = visible.filter((e) => e.type === "pick_star_note");
 
         // 1. Latest spin card
         const latestPrizeEl = document.getElementById("latest-prize-val");
@@ -336,6 +353,38 @@
         } else {
           document.getElementById("love-yes-val").textContent = "Chưa bấm";
           document.getElementById("love-dodge-sub").textContent = "Mini-game nút chạy trốn";
+        }
+
+        // 5. Love Jar (Lọ Sao Tâm Sự)
+        const uniqueStars = new Set(jarPicks.map((j) => j.starNum).filter(Boolean));
+        document.getElementById("jar-count-val").textContent = `${jarPicks.length} lần (${uniqueStars.size}/10 sao)`;
+        document.getElementById("jar-latest-sub").textContent = jarPicks.length
+          ? `Mới nhất: Sao #${jarPicks[0].starNum || 1} • ${jarPicks[0].timeStr || ""}`
+          : "Chưa bốc ngôi sao nào";
+
+        // Render Love Jar List
+        const jarListEl = document.getElementById("jar-list");
+        if (jarListEl) {
+          if (jarPicks.length === 0) {
+            jarListEl.innerHTML = `<div class="empty-state">Chưa bốc ngôi sao nào trong Lọ Sao Tâm Sự.</div>`;
+          } else {
+            jarListEl.innerHTML = jarPicks
+              .map(
+                (j) => `
+                <div class="spin-item" style="border-left-color: #ffb703; background: #fffcf2;">
+                  <div>
+                    <div class="spin-prize" style="color: #b45309;">${j.label || "🌟 Đã bốc sao"}</div>
+                    <div class="spin-detail">${j.note || ""}</div>
+                  </div>
+                  <div class="spin-meta">
+                    <div>🕒 ${j.timeStr || ""} - ${j.dateStr || ""}</div>
+                    <div>${j.device || ""}</div>
+                  </div>
+                </div>
+              `
+              )
+              .join("");
+          }
         }
 
         // Render Spin List

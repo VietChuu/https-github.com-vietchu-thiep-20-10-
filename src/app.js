@@ -769,6 +769,11 @@
       jarNoteCard.classList.add("pop");
     }
     spawnKissHearts(8);
+    trackCardEvent("pick_star_note", {
+      label: `🌟 Lọ Sao Tâm Sự: Đã mở Ngôi sao #${displayNum}/${jarNotes.length}`,
+      note: note,
+      starNum: displayNum
+    });
   }
 
   if (glassJarBtn) {
