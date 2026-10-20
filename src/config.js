@@ -42,7 +42,7 @@ window.CARD_CONFIG = {
     "Chạy đâu cho thoát 🏃‍♂️💨",
     "Thôi nhận đi đừng ngại 😘"
   ],
-  loveSuccessMessage: "Biết ngay là không bấm nút kia được mà 😆 Cảm ơn em đã luôn ở bên anh. Hôm nay thích ăn gì, đi đâu cứ bảo anh nha! ❤️",
+  loveSuccessMessage: "Biết ngay là không bấm nút kia được mà 😆 Cảm ơn em vì đã luôn ở bên cạnh và thông cảm cho anh. Thương em nhiều lắm, cứ mãi vui vẻ bên nhau như vậy nha! ❤️",
 
   // 5. Thư viện ảnh kỷ niệm Polaroid của 2 bạn
   galleryTitle: "Khoảnh Khắc Của Chúng Mình",
@@ -94,9 +94,9 @@ window.CARD_CONFIG = {
   ],
 
   // 6. Lời nhắn bất ngờ cuối trang
-  secretMessageTitle: "Món Quà Nhỏ Dành Riêng Cho Em 🎁",
-  secretMessageBody: "Hôm nay em chỉ việc thật xinh đẹp và mỉm cười thôi nhé! Mọi thứ còn lại — từ hoa, quà cho tới những cái ôm thật chặt — cứ để anh lo! 💐💖",
-  secretVoucherText: "VOUCHER TÌNH YÊU: 1 buổi hẹn hò lãng mạn & bất kỳ món ăn nào em thích (Hạn sử dụng: Mãi mãi)",
+  secretMessageTitle: "Lời Nhắn Nhỏ Cuối Thư 💌",
+  secretMessageBody: "Ngày 20/10 nhớ cười thật nhiều và luôn tươi tắn nhé! Cảm ơn em vì lúc nào cũng hiểu chuyện và đồng hành cùng anh. Hẹn em một buổi đi chơi bù thật vui nha! 🤗💖",
+  secretVoucherText: "ĐẶC QUYỀN CỦA EM: 1000 cái ôm thật chặt, luôn được anh nhường nhịn & 1 buổi hẹn hò bù thật xịn (Hạn sử dụng: Mãi mãi)",
 
   // 7. Đường dẫn nhạc nền (để trống sẽ dùng giai điệu Music Box lãng mạn tích hợp sẵn)
   customMusicUrl: "",
