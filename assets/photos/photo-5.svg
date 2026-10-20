@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg5" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2b102f"/>
+      <stop offset="50%" stop-color="#5c1a4b"/>
+      <stop offset="100%" stop-color="#9e2a5b"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="600" fill="url(#bg5)"/>
+  <!-- Starry Sky -->
+  <g fill="#fff0f3" opacity="0.8">
+    <circle cx="90" cy="95" r="2.5"/>
+    <circle cx="170" cy="140" r="3.5"/>
+    <circle cx="260" cy="80" r="2"/>
+    <circle cx="420" cy="100" r="3"/>
+    <circle cx="510" cy="160" r="2.5"/>
+    <circle cx="120" cy="260" r="2"/>
+    <circle cx="480" cy="280" r="3"/>
+    <circle cx="350" cy="170" r="2"/>
+  </g>
+  <!-- Crescent Moon -->
+  <path d="M350,150 A65,65 0 1,0 410,235 A52,52 0 1,1 350,150 Z" fill="#ffe5ec"/>
+  <!-- Glowing Lanterns / Hearts -->
+  <g transform="translate(220, 290)">
+    <rect x="-22" y="-28" width="44" height="56" rx="14" fill="#ffb703" opacity="0.9"/>
+    <circle cx="0" cy="0" r="12" fill="#fff8f0"/>
+  </g>
+  <g transform="translate(320, 350)">
+    <rect x="-18" y="-22" width="36" height="44" rx="10" fill="#fb8500" opacity="0.85"/>
+    <circle cx="0" cy="0" r="9" fill="#fff8f0"/>
+  </g>
+  <!-- Couple Silhouette on Hill -->
+  <path d="M0,490 Q300,410 600,490 L600,600 L0,600 Z" fill="#1a091e"/>
+  <g transform="translate(300, 440)" fill="#1a091e">
+    <circle cx="-18" cy="-42" r="14"/>
+    <path d="M-36,10 C-36,-25 -2,-25 -2,10 Z"/>
+    <circle cx="16" cy="-36" r="13"/>
+    <path d="M0,10 C0,-20 32,-20 32,10 Z"/>
+  </g>
+  <path d="M299,375 C295,371 280,358 280,346 C280,338 287,332 293,332 C297,332 299,335 299,337 C299,335 301,332 305,332 C311,332 318,338 318,346 C318,358 303,371 299,375 Z" fill="#ff4d6d"/>
+  <text x="300" y="545" text-anchor="middle" font-family="Georgia, serif" font-size="24" fill="#ffe5ec" font-style="italic" opacity="0.9">Under the Same Sky</text>
+</svg>

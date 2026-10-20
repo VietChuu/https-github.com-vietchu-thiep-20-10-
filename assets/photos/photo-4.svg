@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffeaee"/>
+      <stop offset="100%" stop-color="#f8ad9d"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="600" fill="url(#bg4)"/>
+  <circle cx="300" cy="270" r="170" fill="#fff8f6" opacity="0.8"/>
+  <!-- Crown & Tulips for Queen on 20/10 -->
+  <g transform="translate(300, 265)">
+    <!-- Tulip stems -->
+    <path d="M0,20 L0,120" stroke="#52b788" stroke-width="7" stroke-linecap="round"/>
+    <path d="M0,90 Q-40,65 -45,35 Q-15,50 0,85" fill="#74c69d"/>
+    <path d="M0,95 Q40,70 45,40 Q15,55 0,90" fill="#52b788"/>
+    <!-- Tulip blossom -->
+    <path d="M-38,-25 C-42,25 42,25 38,-25 C22,-5 12,-20 0,-38 C-12,-20 -22,-5 -38,-25 Z" fill="#ff4d6d"/>
+    <!-- Golden Crown above Tulip -->
+    <path d="M-45,-65 L-30,-105 L0,-80 L30,-105 L45,-65 Z" fill="#ffb703" stroke="#fb8500" stroke-width="3" stroke-linejoin="round"/>
+    <circle cx="-30" cy="-112" r="5" fill="#ff4d6d"/>
+    <circle cx="0" cy="-88" r="5" fill="#ff4d6d"/>
+    <circle cx="30" cy="-112" r="5" fill="#ff4d6d"/>
+  </g>
+  <text x="300" y="525" text-anchor="middle" font-family="Georgia, serif" font-size="24" fill="#800f2f" font-style="italic" opacity="0.85">My Princess • 20/10</text>
+</svg>

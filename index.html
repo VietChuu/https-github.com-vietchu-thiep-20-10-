@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Chúc Mừng 20/10 — Gửi Người Con Gái Anh Thương 💕</title>
+  <meta name="description" content="Món quà nhỏ và những lời chúc yêu thương ngọt ngào nhất nhân ngày Phụ nữ Việt Nam 20/10." />
+  <meta property="og:title" content="Chúc Mừng 20/10 — Gửi Người Con Gái Anh Thương 💕" />
+  <meta property="og:description" content="Chạm để mở bức thư tình yêu và nhìn lại những khoảnh khắc ngọt ngào của chúng mình." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="src/style.css" />
+</head>
+<body>
+  <!-- Falling Rose Petals Background -->
+  <canvas id="petals-canvas"></canvas>
+
+  <!-- Music Toggle Button -->
+  <button id="music-toggle" class="music-toggle" type="button" aria-label="Bật/Tắt nhạc nền">
+    <span class="vinyl-icon"></span>
+    <span id="music-label">Bật nhạc nền</span>
+  </button>
+
+  <!-- STAGE 1: Interactive 3D Envelope -->
+  <section id="envelope-stage" class="envelope-stage">
+    <div id="intro-date-pill" class="date-pill">🌸 20 • 10 • 2026</div>
+    <h1 id="intro-title" class="intro-title">Gửi Người Con Gái Anh Thương</h1>
+    <p id="intro-subtitle" class="intro-subtitle">
+      Chạm vào phong bì để mở món quà nhỏ từ anh nhé
+    </p>
+
+    <div id="envelope-wrapper" class="envelope-wrapper" role="button" tabindex="0" aria-label="Mở phong bì thiệp 20/10">
+      <div class="envelope-back"></div>
+      <div class="envelope-letter-preview">
+        <span class="preview-badge">Happy Women's Day 20/10</span>
+        <div id="preview-to" class="preview-to">Gửi Em Yêu 💕</div>
+        <div class="preview-heart">💌</div>
+      </div>
+      <div class="envelope-front"></div>
+      <div class="envelope-bottom-pocket"></div>
+      <div class="envelope-flap"></div>
+      <div class="wax-seal">❤️</div>
+    </div>
+
+    <button id="open-envelope-btn" class="open-hint-btn" type="button">
+      Chạm để mở thiệp 💌
+    </button>
+  </section>
+
+  <!-- STAGE 2 & 3: Love Letter + Polaroid Memory Gallery + Gift -->
+  <main id="main-card-content" class="main-card-content">
+    <!-- Love Letter Section -->
+    <section class="letter-section">
+      <article class="letter-paper">
+        <header class="letter-header">
+          <span id="letter-badge" class="letter-badge">Happy Vietnamese Women's Day</span>
+          <h2 id="letter-title" class="letter-title">Chúc Mừng 20/10, Em Yêu!</h2>
+          <div id="letter-date" class="letter-date">20 • 10 • 2026</div>
+        </header>
+
+        <div class="letter-divider">❦ 🌸 ❦</div>
+
+        <div id="letter-greeting" class="letter-greeting">
+          Gửi em — cô gái tuyệt vời nhất của anh,
+        </div>
+
+        <div id="letter-body" class="letter-body"></div>
+
+        <div class="letter-signature-block">
+          <div id="letter-closing" class="letter-closing">Trọn đời thương em,</div>
+          <div id="letter-sender" class="letter-sender">Việt Chu ❤️</div>
+        </div>
+
+        <div class="letter-actions">
+          <a href="#memory-gallery" class="btn-primary">
+            Xem kỷ niệm của chúng mình 📸
+          </a>
+          <button id="send-love-btn" type="button" class="btn-secondary">
+            Thả tim cho anh 💖
+          </button>
+        </div>
+      </article>
+    </section>
+
+    <!-- Polaroid Photo Gallery Section -->
+    <section id="memory-gallery" class="gallery-section">
+      <div class="section-heading">
+        <h2 id="gallery-title" class="section-title">Khoảnh Khắc Của Chúng Mình</h2>
+        <p id="gallery-subtitle" class="section-subtitle">
+          Mỗi bức ảnh là một mảnh ghép hạnh phúc khi có em bên cạnh
+        </p>
+      </div>
+
+      <div id="polaroid-grid" class="polaroid-grid"></div>
+    </section>
+
+    <!-- Secret Gift Box & Voucher Section -->
+    <section class="gift-section">
+      <h3 id="secret-title" class="section-title" style="font-size: 2rem;">
+        Món Quà Nhỏ Dành Riêng Cho Em 🎁
+      </h3>
+      <p class="section-subtitle" style="margin-bottom: 10px;">
+        Chạm vào hộp quà bên dưới để mở bất ngờ cuối cùng nhé!
+      </p>
+
+      <button id="gift-box-btn" class="gift-box-btn" type="button" aria-label="Mở hộp quà">
+        🎁
+      </button>
+
+      <div id="gift-reveal-card" class="gift-reveal-card">
+        <p id="secret-body" style="line-height: 1.7; font-size: 1rem;">
+          Hôm nay em chỉ việc thật xinh đẹp và mỉm cười thôi nhé! Mọi thứ còn lại — từ hoa, quà cho tới những cái ôm thật chặt — cứ để anh lo! 💐💖
+        </p>
+        <div id="secret-voucher" class="voucher-ticket">
+          VOUCHER TÌNH YÊU: 1 buổi hẹn hò lãng mạn & bất kỳ món ăn nào em thích (Hạn sử dụng: Mãi mãi)
+        </div>
+      </div>
+    </section>
+
+    <footer class="card-footer">
+      Made with ❤️ for 20/10 • <a href="qr.html">Mã QR & Tuỳ chỉnh thiệp</a>
+    </footer>
+  </main>
+
+  <!-- Lightbox Modal for Polaroid Photos -->
+  <div id="lightbox-modal" class="lightbox-modal" role="dialog" aria-modal="true">
+    <div class="lightbox-content">
+      <button id="lightbox-close" class="lightbox-close" type="button" aria-label="Đóng">✕</button>
+      <img id="lightbox-img" class="lightbox-img" src="" alt="Kỷ niệm" />
+      <div id="lightbox-caption" class="lightbox-caption"></div>
+      <div id="lightbox-date" class="lightbox-date"></div>
+      <div class="lightbox-nav">
+        <button id="lightbox-prev" type="button">← Ảnh trước</button>
+        <button id="lightbox-next" type="button">Ảnh tiếp →</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="src/config.js"></script>
+  <script src="src/app.js"></script>
+</body>
+</html>
