@@ -99,34 +99,34 @@ window.CARD_CONFIG = {
   wheelSubtitle: "Quay trúng ô nào anh thực hiện ô đó nha! Bấm nút QUAY ở giữa vòng tròn để thử vận may nhé!",
   wheelPrizes: [
     {
-      label: "🛵 Đèo đi dạo",
+      label: "🧋 1 ly nước thích",
       color: "#ffccd5",
-      detail: "Trúng đặc quyền: Được anh đèo đi lượn phố hóng gió mát rượi, vừa đi vừa tám đủ thứ chuyện! 🛵🌆"
+      detail: "Quay trúng: 1 ly trà sữa hoặc đồ uống em yêu thích — thích uống quán nào, topping gì cứ bảo anh nha! 🧋✨"
     },
     {
-      label: "🤗 100 cái ôm",
+      label: "🎬 1 buổi xem phim",
       color: "#fff0f3",
-      detail: "Trúng đặc quyền: Nhận ngay 100 cái ôm thật chặt bất cứ lúc nào gặp nhau (không giới hạn thời hạn)! 🤗💖"
+      detail: "Quay trúng: 1 buổi đi xem phim cùng nhau vào đợt tới — em toàn quyền chọn bộ phim em muốn xem! 🎬🍿"
     },
     {
-      label: "👑 Luôn thắng",
+      label: "🛍️ Đi lựa đồ cùng",
       color: "#ffb3c6",
-      detail: "Đặc quyền tối thượng: Anh tự giác nhường em thắng trong mọi cuộc tranh luận! 👑😆"
+      detail: "Quay trúng: Đi dạo, đi lựa đồ cùng em — cam kết tư vấn có tâm, xách đồ phụ và tuyệt đối không hối về! 🛍️😊"
     },
     {
-      label: "🤏 Véo má anh",
+      label: "📦 Chốt 1 món nhỏ",
       color: "#ffe5ec",
-      detail: "Trúng đặc quyền: Cho phép em véo má hoặc trêu anh thoải mái mà anh vẫn phải cười tươi! 🤏😂"
+      detail: "Quay trúng: Chốt đơn tặng em 1 món đồ nhỏ xinh trong giỏ hàng vào đợt tới nha! 📦💖"
     },
     {
-      label: "🎟️ Đi chơi bù",
+      label: "🍜 Ăn món em thèm",
       color: "#ffccd5",
-      detail: "Giải đặc biệt: 1 buổi hẹn hò đi chơi bù thật vui do em toàn quyền chọn địa điểm! 🎟️✨"
+      detail: "Quay trúng: 1 buổi đi ăn bù món em đang thèm nhất — em chọn quán, chọn món thoải mái luôn! 🍜😋"
     },
     {
-      label: "💌 Làm hoà ngay",
+      label: "🙋‍♂️ Sai vặt 1 việc",
       color: "#fff0f3",
-      detail: "Thẻ bài yêu thương: Dù ai có lỡ dỗi hay quạu thì cũng phải nắm tay làm hoà ngay lập tức! 💌🌷"
+      detail: "Quay trúng: Đặc quyền sai vặt hợp pháp — nhờ anh làm giúp 1 việc bất kỳ mà em đang lười làm! 🙋‍♂️💪"
     }
   ],
 
