@@ -103,7 +103,23 @@ window.CARD_CONFIG = {
   scratchSecretMessage: "Nhìn mặt kìa, dỗi hay nhăn mặt nhìn vẫn cứ là cưng nhất quả đất! Ngày 20/10 bớt quạu với anh lại nha, thương nhiều lắm! ❤️",
   scratchSecretBadge: "🎟️ Đặc quyền: 1 buổi đi chơi bù thật vui & 1000 cái ôm",
 
-  // 7. Lời nhắn bất ngờ cuối trang
+  // 7. Lọ Sao Tâm Sự (Love Jar - Chạm để bốc từng tờ giấy nhỏ)
+  jarTitle: "Lọ Sao Tâm Sự 🌟",
+  jarSubtitle: "Trong chiếc lọ này có 10 điều nhỏ anh muốn nhắn gửi. Chạm vào lọ thuỷ tinh để bốc từng ngôi sao nhé!",
+  jarNotes: [
+    "Thích nhất là lúc hai đứa ngồi cạnh nhau cười tít cả mắt, bao nhiêu mệt mỏi trong ngày đều tan biến hết. ✨",
+    "Lúc em làm mặt quạu hay nhăn mũi nhìn vừa buồn cười vừa đáng yêu, muốn giận cũng không giận nổi luôn. 😆",
+    "Cảm ơn em vì lúc nào cũng hiểu chuyện, thông cảm và ở bên cạnh anh cả những lúc giản dị nhất. ❤️",
+    "Đi đâu cũng được, làm gì cũng vui, miễn là hôm đó có em đi cùng anh. 🛵💕",
+    "Thích cảm giác đèo em ngồi sau xe đi dạo phố, hai đứa vừa đi vừa kể đủ thứ chuyện trên đời. 🌆",
+    "Mỗi lần mở điện thoại nhìn lại mấy tấm ảnh nhí nhố của hai đứa là anh lại bất giác cười một mình. 📸",
+    "Cảm ơn em từ ngày 25/03/2026 đã bước vào cuộc sống của anh và làm mọi thứ trở nên ấm áp hơn hẳn. 🌸",
+    "Đôi khi anh hơi vụng về hoặc chưa chu đáo hết được, cảm ơn em vì vẫn luôn kiên nhẫn và thương anh. 🤗",
+    "Chúc cô gái của anh ngày 20/10 và mỗi ngày sau này đều giữ được nụ cười tươi tắn như hiện tại nha. 🌷",
+    "Ngôi sao đặc biệt: Anh nợ em một buổi đi chơi bù thật vui, nhớ chụp màn hình ngôi sao này để đòi nha! 🎟️💖"
+  ],
+
+  // 8. Lời nhắn bất ngờ cuối trang
   secretMessageTitle: "Lời Nhắn Nhỏ Cuối Thư 💌",
   secretMessageBody: "Ngày 20/10 nhớ cười thật nhiều và luôn tươi tắn nhé! Cảm ơn em vì lúc nào cũng hiểu chuyện và đồng hành cùng anh. Hẹn em một buổi đi chơi bù thật vui nha! 🤗💖",
   secretVoucherText: "ĐẶC QUYỀN CỦA EM: 1000 cái ôm thật chặt, luôn được anh nhường nhịn & 1 buổi hẹn hò bù thật xịn (Hạn sử dụng: Mãi mãi)",

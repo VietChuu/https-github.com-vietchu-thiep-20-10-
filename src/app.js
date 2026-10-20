@@ -40,6 +40,8 @@
   setText("scratch-headline", cfg.scratchSecretHeadline);
   setText("scratch-msg", cfg.scratchSecretMessage);
   setText("scratch-badge", cfg.scratchSecretBadge);
+  setText("jar-title", cfg.jarTitle);
+  setText("jar-subtitle", cfg.jarSubtitle);
   setText("secret-title", cfg.secretMessageTitle);
   setText("secret-body", cfg.secretMessageBody);
   setText("secret-voucher", cfg.secretVoucherText);
@@ -515,6 +517,50 @@
     scratchResetBtn.addEventListener("click", () => {
       drawScratchCover();
     });
+  }
+
+  // ==========================================================================
+  // 5C. INTERACTIVE WISH STAR JAR ("LỌ SAO TÂM SỰ")
+  // ==========================================================================
+  const glassJarBtn = document.getElementById("glass-jar-btn");
+  const jarNoteCard = document.getElementById("jar-note-card");
+  const jarNoteBadge = document.getElementById("jar-note-badge");
+  const jarNoteText = document.getElementById("jar-note-text");
+  const jarNotes = cfg.jarNotes || [];
+  let currentJarIdx = 0;
+
+  function pickNextStarNote() {
+    if (!jarNotes.length) return;
+    if (glassJarBtn) {
+      glassJarBtn.classList.remove("shaking");
+      void glassJarBtn.offsetWidth;
+      glassJarBtn.classList.add("shaking");
+    }
+
+    const note = jarNotes[currentJarIdx % jarNotes.length];
+    const displayNum = (currentJarIdx % jarNotes.length) + 1;
+    currentJarIdx++;
+
+    if (jarNoteBadge) {
+      jarNoteBadge.textContent = `🌟 Ngôi sao #${displayNum} / ${jarNotes.length}`;
+    }
+    if (jarNoteText) {
+      jarNoteText.textContent = note;
+    }
+    if (jarNoteCard) {
+      jarNoteCard.classList.remove("pop");
+      void jarNoteCard.offsetWidth;
+      jarNoteCard.classList.add("pop");
+    }
+    spawnKissHearts(8);
+  }
+
+  if (glassJarBtn) {
+    glassJarBtn.addEventListener("click", pickNextStarNote);
+  }
+  if (jarNoteCard) {
+    jarNoteCard.style.cursor = "pointer";
+    jarNoteCard.addEventListener("click", pickNextStarNote);
   }
 
   // ==========================================================================
