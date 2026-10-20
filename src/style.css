@@ -1373,3 +1373,303 @@ body {
   color: var(--wine-text);
   font-weight: 500;
 }
+
+/* ============================================================================
+   RETRO PASTEL INSTAX CAMERA & PHOTO DEVELOPING ANIMATION
+   ============================================================================ */
+.instax-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 36px;
+  position: relative;
+}
+
+.instax-camera {
+  width: min(350px, 92vw);
+  background: linear-gradient(155deg, #ffdde4 0%, #ffb3c6 55%, #ff8fa3 100%);
+  border-radius: 38px;
+  padding: 20px 22px 16px;
+  box-shadow:
+    0 22px 45px rgba(164, 19, 60, 0.24),
+    inset 0 4px 10px rgba(255, 255, 255, 0.8),
+    inset 0 -6px 14px rgba(164, 19, 60, 0.18);
+  border: 4px solid #fff5f7;
+  position: relative;
+  z-index: 6;
+  user-select: none;
+}
+
+.instax-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  padding: 0 6px;
+}
+
+.instax-flash {
+  width: 54px;
+  height: 34px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #ffffff 0%, #e9ecef 60%, #ced4da 100%);
+  border: 2px solid #fff;
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.15), 0 4px 10px rgba(128, 15, 47, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.instax-flash.flashing {
+  background: #ffffff;
+  box-shadow: 0 0 45px 22px rgba(255, 255, 255, 0.98), 0 0 85px 40px rgba(255, 183, 3, 0.55);
+  transform: scale(1.12);
+}
+
+.instax-brand {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 1.8px;
+  color: var(--wine-dark);
+  background: rgba(255, 255, 255, 0.65);
+  padding: 4px 12px;
+  border-radius: 999px;
+}
+
+.instax-viewfinder {
+  width: 34px;
+  height: 28px;
+  border-radius: 8px;
+  background: radial-gradient(circle at 35% 35%, #495057, #1b1f22 80%);
+  border: 2.5px solid #fff0f3;
+  box-shadow: inset 0 2px 5px rgba(255, 255, 255, 0.35);
+}
+
+.instax-middle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 4px 16px;
+}
+
+.instax-shutter-btn {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  border: 4px solid #ffffff;
+  background: radial-gradient(circle at 30% 30%, #ff4d6d, #c9184a);
+  color: #fff;
+  font-size: 1.35rem;
+  cursor: pointer;
+  box-shadow: 0 8px 18px rgba(164, 19, 60, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  animation: sealPulse 2.2s infinite;
+}
+
+.instax-shutter-btn:active {
+  transform: scale(0.9);
+}
+
+.instax-lens {
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  padding: 10px;
+  background: linear-gradient(145deg, #fffdf9, #ffd6e0);
+  box-shadow:
+    0 12px 26px rgba(128, 15, 47, 0.25),
+    inset 0 3px 6px rgba(255, 255, 255, 0.9);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid #ff8fa3;
+}
+
+.lens-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  border: 5px solid #2b0912;
+  background: #1a0910;
+}
+
+.lens-inner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: contrast(1.05) brightness(0.95);
+  transition: transform 0.35s ease, opacity 0.35s ease;
+}
+
+.instax-lens:hover .lens-inner img {
+  transform: scale(1.08);
+}
+
+.lens-glare {
+  position: absolute;
+  top: 12px;
+  left: 16px;
+  width: 24px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.55);
+  transform: rotate(-30deg);
+  pointer-events: none;
+}
+
+.instax-counter-panel {
+  width: 52px;
+  background: #2b0912;
+  border-radius: 12px;
+  padding: 8px 4px;
+  text-align: center;
+  border: 2px solid #fff0f3;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+.counter-led-label {
+  display: block;
+  font-size: 0.58rem;
+  color: #ffb3c6;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.counter-led-num {
+  display: block;
+  font-family: monospace;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #ffccd5;
+}
+
+.instax-bottom-slot {
+  background: #4a1525;
+  height: 14px;
+  border-radius: 999px;
+  padding: 3px 18px;
+  box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.6);
+}
+
+.slot-opening {
+  width: 100%;
+  height: 100%;
+  background: #1d060d;
+  border-radius: 999px;
+}
+
+/* Ejecting Photo Tray Underneath Camera */
+.instax-eject-zone {
+  width: min(290px, 84vw);
+  min-height: 20px;
+  margin-top: -8px;
+  z-index: 4;
+  overflow: hidden;
+  padding: 0 12px 18px;
+  display: none;
+}
+
+.instax-eject-zone.active {
+  display: block;
+}
+
+.instax-developing-card {
+  background: #ffffff;
+  padding: 14px 14px 20px;
+  border-radius: 8px;
+  box-shadow: 0 16px 35px rgba(89, 13, 34, 0.22);
+  cursor: pointer;
+  transform: translateY(-105%);
+  animation: slideOutFilm 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes slideOutFilm {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(8px);
+  }
+}
+
+.instax-developing-card .polaroid-img-wrap img.developing {
+  animation: developFilm 2.4s ease-out forwards;
+}
+
+@keyframes developFilm {
+  0% {
+    filter: brightness(3.2) contrast(0.35) saturate(0) blur(10px);
+  }
+  45% {
+    filter: brightness(1.7) contrast(0.75) saturate(0.4) sepia(0.25) blur(3px);
+  }
+  100% {
+    filter: brightness(1) contrast(1) saturate(1) sepia(0) blur(0px);
+  }
+}
+
+.developing-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 240, 243, 0.45);
+  color: var(--wine-dark);
+  font-size: 0.82rem;
+  font-weight: 700;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.developing-overlay.visible {
+  opacity: 1;
+}
+
+.instax-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 18px;
+}
+
+.album-wall-header {
+  text-align: center;
+  margin: 18px 0 24px;
+}
+
+.album-wall-badge {
+  display: inline-block;
+  padding: 8px 20px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid #ffb3c6;
+  color: var(--rose-deep);
+  font-size: 0.88rem;
+  font-weight: 600;
+  box-shadow: 0 4px 14px rgba(201, 24, 74, 0.1);
+}
+
+.camera-screen-flash {
+  position: fixed;
+  inset: 0;
+  background: #ffffff;
+  z-index: 9999;
+  pointer-events: none;
+  animation: screenFlashOut 0.55s ease-out forwards;
+}
+
+@keyframes screenFlashOut {
+  0% { opacity: 0.88; }
+  100% { opacity: 0; }
+}

@@ -44,9 +44,9 @@ window.CARD_CONFIG = {
   ],
   loveSuccessMessage: "Biết ngay là không bấm nút kia được mà 😆 Cảm ơn em vì đã luôn ở bên cạnh và thông cảm cho anh. Thương em nhiều lắm, cứ mãi vui vẻ bên nhau như vậy nha! ❤️",
 
-  // 5. Thư viện ảnh kỷ niệm Polaroid của 2 bạn
-  galleryTitle: "Khoảnh Khắc Của Chúng Mình",
-  gallerySubtitle: "Mỗi bức ảnh là một mảnh ghép hạnh phúc khi có em bên cạnh (Chạm vào ảnh để xem rõ hơn nhé)",
+  // 5. Máy Ảnh Instax & Thư Viện Ảnh Kỷ Niệm của 2 bạn
+  galleryTitle: "Máy Ảnh Kỷ Niệm Của Chúng Mình 📸",
+  gallerySubtitle: "Bấm nút chụp trên máy ảnh Instax bên dưới để in từng tấm hình kỷ niệm của hai đứa nhé!",
   photos: [
     {
       src: "assets/photos/1792466461888_2199372916196262329_2672750711596410923_h.jpg",

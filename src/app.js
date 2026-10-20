@@ -253,15 +253,69 @@
   }
 
   // ==========================================================================
-  // 4. POLAROID GALLERY & LIGHTBOX
+  // 4. INTERACTIVE INSTAX CAMERA, PHOTO DEVELOPING & LIGHTBOX
   // ==========================================================================
   const galleryGrid = document.getElementById("polaroid-grid");
+  const albumWallHeader = document.getElementById("album-wall-header");
   const lightbox = document.getElementById("lightbox-modal");
   const lightboxImg = document.getElementById("lightbox-img");
   const lightboxCaption = document.getElementById("lightbox-caption");
   const lightboxDate = document.getElementById("lightbox-date");
+
+  const shutterBtn = document.getElementById("instax-shutter-btn");
+  const instaxLens = document.getElementById("instax-lens");
+  const shootCtaBtn = document.getElementById("instax-shoot-cta");
+  const printAllBtn = document.getElementById("instax-print-all-btn");
+  const instaxFlash = document.getElementById("instax-flash");
+  const filmCountEl = document.getElementById("instax-film-count");
+  const lensPreviewImg = document.getElementById("lens-preview-img");
+  const ejectZone = document.getElementById("instax-eject-zone");
+  const developingCard = document.getElementById("instax-developing-card");
+  const developingImg = document.getElementById("developing-img");
+  const developingOverlay = document.getElementById("developing-overlay");
+  const developingCaption = document.getElementById("developing-caption");
+  const developingDate = document.getElementById("developing-date");
+
   let currentPhotoIdx = 0;
+  let shotIndex = 0;
+  let isShooting = false;
   const photos = cfg.photos || [];
+  const printedSet = new Set();
+
+  function playShutterSound() {
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContextClass) return;
+    if (!audioCtx) audioCtx = new AudioContextClass();
+    if (audioCtx.state === "suspended") audioCtx.resume();
+
+    const now = audioCtx.currentTime;
+    // Crisp shutter click
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.type = "triangle";
+    osc.frequency.setValueAtTime(1100, now);
+    osc.frequency.exponentialRampToValueAtTime(140, now + 0.06);
+    gain.gain.setValueAtTime(0.18, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.065);
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.start(now);
+    osc.stop(now + 0.07);
+
+    // Soft film motor whir
+    const motorOsc = audioCtx.createOscillator();
+    const motorGain = audioCtx.createGain();
+    motorOsc.type = "sine";
+    motorOsc.frequency.setValueAtTime(210, now + 0.08);
+    motorOsc.frequency.linearRampToValueAtTime(260, now + 0.48);
+    motorGain.gain.setValueAtTime(0.001, now + 0.08);
+    motorGain.gain.linearRampToValueAtTime(0.04, now + 0.14);
+    motorGain.gain.exponentialRampToValueAtTime(0.001, now + 0.52);
+    motorOsc.connect(motorGain);
+    motorGain.connect(audioCtx.destination);
+    motorOsc.start(now + 0.08);
+    motorOsc.stop(now + 0.55);
+  }
 
   function openLightbox(index) {
     if (!photos.length) return;
@@ -277,7 +331,7 @@
     lightbox.classList.remove("active");
   }
 
-  photos.forEach((photo, idx) => {
+  function createPolaroidCard(photo, idx, animateDeveloping = false) {
     const card = document.createElement("div");
     card.className = "polaroid-card";
     card.style.setProperty("--rot", photo.rotation || (idx % 2 === 0 ? "-2.5deg" : "2.5deg"));
@@ -289,15 +343,119 @@
 
     card.innerHTML = `
       <div class="polaroid-img-wrap">
-        <img src="${photo.src}" alt="${photo.caption || 'Kỷ niệm'}" loading="lazy" style="${imgStyle}" />
+        <img src="${photo.src}" alt="${photo.caption || 'Kỷ niệm'}" loading="lazy" style="${imgStyle}" class="${animateDeveloping ? 'developing' : ''}" />
       </div>
       <div class="polaroid-caption">${photo.caption || ""}</div>
       <span class="polaroid-date">${photo.date || ""}</span>
     `;
 
     card.addEventListener("click", () => openLightbox(idx));
-    galleryGrid.appendChild(card);
-  });
+    return card;
+  }
+
+  function updateCameraStatus() {
+    const remaining = Math.max(0, photos.length - shotIndex);
+    if (filmCountEl) filmCountEl.textContent = remaining;
+
+    if (lensPreviewImg && photos.length) {
+      const nextPhoto = photos[shotIndex % photos.length];
+      lensPreviewImg.src = nextPhoto.src;
+    }
+
+    if (shootCtaBtn) {
+      if (shotIndex < photos.length) {
+        shootCtaBtn.textContent = `📸 Bấm chụp tấm tiếp theo (${shotIndex + 1}/${photos.length})`;
+      } else {
+        shootCtaBtn.textContent = "🔄 Chụp lại từ tấm đầu tiên";
+      }
+    }
+  }
+
+  function shootNextPhoto() {
+    if (isShooting || !photos.length) return;
+    isShooting = true;
+
+    if (shotIndex >= photos.length) {
+      shotIndex = 0;
+    }
+
+    const idx = shotIndex;
+    const photo = photos[idx];
+    shotIndex++;
+
+    // 1. Sound + Flash
+    playShutterSound();
+    if (instaxFlash) {
+      instaxFlash.classList.add("flashing");
+      setTimeout(() => instaxFlash.classList.remove("flashing"), 420);
+    }
+
+    const screenFlash = document.createElement("div");
+    screenFlash.className = "camera-screen-flash";
+    document.body.appendChild(screenFlash);
+    setTimeout(() => screenFlash.remove(), 560);
+
+    // 2. Eject & Develop in Tray
+    if (ejectZone && developingCard && developingImg) {
+      ejectZone.classList.add("active");
+      developingCard.style.animation = "none";
+      void developingCard.offsetWidth;
+      developingCard.style.animation = "slideOutFilm 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards";
+
+      developingImg.className = "";
+      developingImg.src = photo.src;
+      developingImg.style.objectFit = photo.fit || "cover";
+      developingImg.style.objectPosition = photo.position || "center center";
+      void developingImg.offsetWidth;
+      developingImg.classList.add("developing");
+
+      if (developingCaption) developingCaption.textContent = photo.caption || "";
+      if (developingDate) developingDate.textContent = photo.date || "";
+      if (developingOverlay) {
+        developingOverlay.classList.add("visible");
+        setTimeout(() => developingOverlay.classList.remove("visible"), 1350);
+      }
+
+      developingCard.onclick = () => openLightbox(idx);
+    }
+
+    // 3. Pin onto Album Wall if not yet added
+    if (!printedSet.has(idx) && galleryGrid) {
+      printedSet.add(idx);
+      if (albumWallHeader) albumWallHeader.style.display = "block";
+      const card = createPolaroidCard(photo, idx, true);
+      galleryGrid.appendChild(card);
+    }
+
+    updateCameraStatus();
+    spawnKissHearts(8);
+
+    setTimeout(() => {
+      isShooting = false;
+    }, 650);
+  }
+
+  function printAllPhotos() {
+    if (!galleryGrid) return;
+    if (albumWallHeader) albumWallHeader.style.display = "block";
+    photos.forEach((photo, idx) => {
+      if (!printedSet.has(idx)) {
+        printedSet.add(idx);
+        const card = createPolaroidCard(photo, idx, true);
+        galleryGrid.appendChild(card);
+      }
+    });
+    shotIndex = photos.length;
+    updateCameraStatus();
+    spawnKissHearts(16);
+  }
+
+  if (shutterBtn) shutterBtn.addEventListener("click", shootNextPhoto);
+  if (instaxLens) instaxLens.addEventListener("click", shootNextPhoto);
+  if (shootCtaBtn) shootCtaBtn.addEventListener("click", shootNextPhoto);
+  if (printAllBtn) printAllBtn.addEventListener("click", printAllPhotos);
+
+  updateCameraStatus();
 
   document.getElementById("lightbox-close").addEventListener("click", closeLightbox);
   document.getElementById("lightbox-prev").addEventListener("click", () => openLightbox(currentPhotoIdx - 1));
