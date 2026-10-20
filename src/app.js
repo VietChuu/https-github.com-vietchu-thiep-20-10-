@@ -790,6 +790,7 @@
   let wheelRotation = 0;
   let isWheelSpinning = false;
   let spinCount = 0;
+  let latestWonWheelLabel = "";
 
   function playWheelTick(freq = 620) {
     const AudioContextClass = window.AudioContext || window.webkitAudioContext;
@@ -885,6 +886,11 @@
     setTimeout(() => {
       isWheelSpinning = false;
       const won = wheelPrizes[targetIdx];
+      latestWonWheelLabel = won.label;
+      const receiptWheelItemEl = document.getElementById("receipt-wheel-item");
+      if (receiptWheelItemEl) {
+        receiptWheelItemEl.textContent = `01x Quà Vòng Quay: ${won.label}`;
+      }
       if (wheelResultText) wheelResultText.textContent = won.detail || won.label;
       if (wheelResultBox) {
         wheelResultBox.classList.remove("active");
@@ -908,6 +914,140 @@
   if (wheelCanvas) {
     wheelCanvas.style.cursor = "pointer";
     wheelCanvas.addEventListener("click", spinLuckyWheel);
+  }
+
+  // ==========================================================================
+  // 5E. INTERACTIVE THERMAL RECEIPT PRINTER & RED RUBBER STAMP
+  // ==========================================================================
+  const printReceiptBtn = document.getElementById("print-receipt-btn");
+  const receiptViewport = document.getElementById("receipt-paper-viewport");
+  const receiptPaper = document.getElementById("thermal-receipt-paper");
+  const receiptActions = document.getElementById("receipt-actions");
+  const stampReceiptBtn = document.getElementById("stamp-receipt-btn");
+  const redRubberStamp = document.getElementById("red-rubber-stamp");
+  const stampHintText = document.getElementById("stamp-hint-text");
+
+  function playThermalPrinterSound() {
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContextClass) return;
+    if (!audioCtx) audioCtx = new AudioContextClass();
+    if (audioCtx.state === "suspended") audioCtx.resume();
+
+    // 14 rapid stepper motor ticks + final beep
+    for (let i = 0; i < 14; i++) {
+      setTimeout(() => {
+        const now = audioCtx.currentTime;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = "sawtooth";
+        osc.frequency.setValueAtTime(280 + (i % 2) * 55, now);
+        gain.gain.setValueAtTime(0.035, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.045);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(now);
+        osc.stop(now + 0.05);
+      }, i * 135);
+    }
+
+    // POS completion beep
+    setTimeout(() => {
+      const now = audioCtx.currentTime;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(1046.5, now);
+      gain.gain.setValueAtTime(0.08, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.18);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start(now);
+      osc.stop(now + 0.2);
+    }, 1950);
+  }
+
+  function playStampThudSound() {
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContextClass) return;
+    if (!audioCtx) audioCtx = new AudioContextClass();
+    if (audioCtx.state === "suspended") audioCtx.resume();
+
+    const now = audioCtx.currentTime;
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.type = "sine";
+    osc.frequency.setValueAtTime(160, now);
+    osc.frequency.exponentialRampToValueAtTime(42, now + 0.14);
+    gain.gain.setValueAtTime(0.28, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.16);
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.start(now);
+    osc.stop(now + 0.17);
+  }
+
+  if (printReceiptBtn && receiptViewport && receiptPaper) {
+    printReceiptBtn.addEventListener("click", () => {
+      const timeLabelEl = document.getElementById("receipt-time-label");
+      if (timeLabelEl) {
+        const nowStr = new Date().toLocaleTimeString("vi-VN", { hour: "2-digit", minute: "2-digit" });
+        timeLabelEl.textContent = `${nowStr} • 20/10/2026`;
+      }
+
+      const daysValEl = document.getElementById("receipt-days-val");
+      if (daysValEl && daysEl) {
+        daysValEl.textContent = `${daysEl.textContent} ngày`;
+      }
+
+      const receiptWheelItemEl = document.getElementById("receipt-wheel-item");
+      if (receiptWheelItemEl) {
+        receiptWheelItemEl.textContent = latestWonWheelLabel
+          ? `01x Quà Vòng Quay: ${latestWonWheelLabel}`
+          : "01x Quà Vòng Quay: Tự chọn 1 ô";
+      }
+
+      if (redRubberStamp) redRubberStamp.classList.remove("stamped");
+      if (stampReceiptBtn) {
+        stampReceiptBtn.disabled = false;
+        stampReceiptBtn.textContent = "💮 Bấm Đóng Dấu 'CHỐT ĐƠN'";
+      }
+
+      receiptViewport.classList.add("active");
+      receiptPaper.classList.remove("printing");
+      void receiptPaper.offsetWidth;
+      receiptPaper.classList.add("printing");
+
+      playThermalPrinterSound();
+
+      setTimeout(() => {
+        if (receiptActions) receiptActions.style.display = "block";
+      }, 2050);
+
+      trackCardEvent("print_receipt", {
+        label: "Đã in Hoá Đơn Tình Yêu 🧾",
+        note: latestWonWheelLabel ? `Kèm món quà: ${latestWonWheelLabel}` : "In hoá đơn đặc quyền 20/10"
+      });
+    });
+  }
+
+  if (stampReceiptBtn && redRubberStamp) {
+    stampReceiptBtn.addEventListener("click", () => {
+      playStampThudSound();
+      redRubberStamp.classList.remove("stamped");
+      void redRubberStamp.offsetWidth;
+      redRubberStamp.classList.add("stamped");
+
+      stampReceiptBtn.textContent = "✅ Đã đóng dấu xác nhận thành công!";
+      if (stampHintText) {
+        stampHintText.textContent = "📸 Chụp màn hình tờ hoá đơn đã có mộc đỏ này gửi cho anh để đòi quyền lợi nha!";
+      }
+      spawnKissHearts(24);
+
+      trackCardEvent("stamp_receipt", {
+        label: "Đã đóng dấu mộc đỏ CHỐT ĐƠN Hoá Đơn 💮",
+        note: latestWonWheelLabel ? `Chốt đơn món quà: ${latestWonWheelLabel}` : "Đã đóng dấu xác nhận hoá đơn"
+      });
+    });
   }
 
   // ==========================================================================

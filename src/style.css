@@ -1991,3 +1991,363 @@ body {
   color: var(--wine-dark);
   line-height: 1.65;
 }
+
+/* ============================================================================
+   INTERACTIVE THERMAL RECEIPT PRINTER & RED RUBBER STAMP ("HOÁ ĐƠN TÌNH YÊU")
+   ============================================================================ */
+.receipt-section {
+  max-width: 640px;
+  margin: 0 auto 72px;
+}
+
+.receipt-card-box {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(12px);
+  border-radius: 26px;
+  padding: 36px 20px 32px;
+  text-align: center;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid rgba(255, 179, 198, 0.7);
+}
+
+.printer-unit {
+  width: min(370px, 92vw);
+  margin: 0 auto;
+  background: linear-gradient(160deg, #ffe5ec 0%, #ffb3c6 65%, #ff8fa3 100%);
+  border-radius: 26px 26px 14px 14px;
+  padding: 18px 20px 14px;
+  border: 3px solid #fff5f7;
+  box-shadow:
+    0 16px 34px rgba(164, 19, 60, 0.22),
+    inset 0 3px 8px rgba(255, 255, 255, 0.85);
+  position: relative;
+  z-index: 6;
+}
+
+.printer-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.printer-led-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #2b0912;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.printer-led {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 8px #22c55e;
+}
+
+.printer-led-text {
+  font-family: monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #86efac;
+}
+
+.printer-brand {
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 1.4px;
+  color: var(--wine-dark);
+  background: rgba(255, 255, 255, 0.65);
+  padding: 4px 12px;
+  border-radius: 999px;
+}
+
+.printer-power-icon {
+  font-size: 0.95rem;
+}
+
+.print-receipt-btn {
+  width: 100%;
+  padding: 13px 20px;
+  border-radius: 14px;
+  border: 2px solid #ffffff;
+  background: linear-gradient(135deg, var(--rose-primary), var(--rose-deep));
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(164, 19, 60, 0.28);
+  margin-bottom: 14px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.print-receipt-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(164, 19, 60, 0.36);
+}
+
+.printer-paper-slot {
+  background: #3d0c1b;
+  height: 14px;
+  border-radius: 999px;
+  padding: 4px 14px;
+  box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.65);
+}
+
+.printer-slot-inner {
+  width: 100%;
+  height: 100%;
+  background: #170409;
+  border-radius: 999px;
+}
+
+/* Thermal Receipt Paper Viewport */
+.receipt-paper-viewport {
+  width: min(336px, 88vw);
+  margin: -6px auto 0;
+  overflow: hidden;
+  padding: 0 8px 20px;
+  display: none;
+  position: relative;
+  z-index: 4;
+}
+
+.receipt-paper-viewport.active {
+  display: block;
+}
+
+.thermal-receipt-paper {
+  background: #fffdf8;
+  color: #2b1d22;
+  font-family: 'Courier New', Courier, monospace;
+  box-shadow: 0 16px 36px rgba(43, 9, 18, 0.18);
+  position: relative;
+  transform: translateY(-102%);
+}
+
+.thermal-receipt-paper.printing {
+  animation: feedReceiptPaper 2.1s steps(18, end) forwards;
+}
+
+@keyframes feedReceiptPaper {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+.receipt-zigzag-top,
+.receipt-zigzag-bottom {
+  height: 10px;
+  width: 100%;
+  background-size: 16px 10px;
+}
+
+.receipt-zigzag-top {
+  background-image: linear-gradient(135deg, #fffdf8 50%, transparent 50%),
+    linear-gradient(225deg, #fffdf8 50%, transparent 50%);
+  margin-top: -8px;
+}
+
+.receipt-zigzag-bottom {
+  background-image: linear-gradient(45deg, transparent 50%, #fffdf8 50%),
+    linear-gradient(-45deg, transparent 50%, #fffdf8 50%);
+  margin-bottom: -8px;
+}
+
+.receipt-content {
+  padding: 20px 18px 18px;
+  position: relative;
+}
+
+.receipt-shop-name {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: var(--wine-dark);
+  margin-bottom: 3px;
+}
+
+.receipt-shop-sub {
+  font-size: 0.76rem;
+  color: #6c4652;
+  margin-bottom: 12px;
+}
+
+.receipt-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  margin-bottom: 4px;
+  color: #4a2c35;
+  font-weight: 600;
+}
+
+.receipt-divider {
+  font-size: 0.72rem;
+  color: #b58d98;
+  overflow: hidden;
+  white-space: nowrap;
+  margin: 8px 0;
+}
+
+.receipt-table {
+  display: grid;
+  gap: 7px;
+  text-align: left;
+  font-size: 0.78rem;
+}
+
+.r-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  align-items: baseline;
+  font-weight: 600;
+}
+
+.r-row.r-head {
+  font-weight: 800;
+  color: var(--wine-dark);
+  border-bottom: 1px dashed #d8b4be;
+  padding-bottom: 4px;
+}
+
+.r-row.r-highlight {
+  background: #fff0f3;
+  padding: 6px 8px;
+  border-radius: 6px;
+  color: var(--rose-deep);
+  font-weight: 800;
+  border: 1px dashed #ff8fa3;
+}
+
+.receipt-total-block {
+  margin: 6px 0 12px;
+}
+
+.r-total-row {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: var(--rose-deep);
+}
+
+.r-total-sub {
+  font-size: 0.72rem;
+  color: #7d5360;
+  margin-top: 4px;
+  font-style: italic;
+}
+
+/* Red Circular Rubber Stamp */
+.receipt-stamp-zone {
+  min-height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 6px 0 10px;
+  position: relative;
+}
+
+.red-rubber-stamp {
+  border: 3px double #d90429;
+  color: #d90429;
+  padding: 8px 16px;
+  border-radius: 12px;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  text-transform: uppercase;
+  background: rgba(217, 4, 41, 0.06);
+  box-shadow: inset 0 0 0 1px rgba(217, 4, 41, 0.35);
+  opacity: 0;
+  transform: scale(2.8) rotate(-12deg);
+  pointer-events: none;
+}
+
+.red-rubber-stamp.stamped {
+  animation: slamRedStamp 0.42s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes slamRedStamp {
+  0% {
+    opacity: 0;
+    transform: scale(2.8) rotate(-18deg);
+  }
+  70% {
+    opacity: 0.95;
+    transform: scale(0.92) rotate(-8deg);
+  }
+  100% {
+    opacity: 0.92;
+    transform: scale(1) rotate(-8deg);
+  }
+}
+
+.stamp-top {
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.stamp-main {
+  font-size: 0.95rem;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  margin: 2px 0;
+}
+
+.stamp-sub {
+  font-size: 0.62rem;
+  font-weight: 700;
+}
+
+.receipt-barcode {
+  height: 34px;
+  width: 82%;
+  margin: 6px auto 4px;
+  background: repeating-linear-gradient(
+    90deg,
+    #2b0912 0px,
+    #2b0912 2px,
+    transparent 2px,
+    transparent 5px,
+    #2b0912 5px,
+    #2b0912 9px,
+    transparent 9px,
+    transparent 11px,
+    #2b0912 11px,
+    #2b0912 12px,
+    transparent 12px,
+    transparent 16px
+  );
+}
+
+.receipt-barcode-num {
+  font-size: 0.68rem;
+  letter-spacing: 2px;
+  color: #5c3a44;
+}
+
+.receipt-actions {
+  margin-top: 12px;
+}
+
+.stamp-hint-text {
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  margin-top: 10px;
+  font-weight: 500;
+}

@@ -349,6 +349,122 @@
       </div>
     </section>
 
+    <!-- 7B. Interactive Thermal Receipt Printer ("Máy In Hoá Đơn Tình Yêu") -->
+    <section id="receipt-section" class="receipt-section">
+      <div class="receipt-card-box">
+        <h3 class="section-title" style="font-size: 2rem;">
+          Máy In Hoá Đơn Kỷ Niệm 🧾
+        </h3>
+        <p class="section-subtitle" style="margin-bottom: 22px;">
+          Quay vòng quay xong nhớ bấm in hoá đơn và đóng dấu mộc đỏ để giữ làm bằng chứng đòi quà anh nha!
+        </p>
+
+        <!-- Thermal Printer Hardware Unit -->
+        <div class="printer-unit">
+          <div class="printer-top-row">
+            <div class="printer-led-group">
+              <span class="printer-led"></span>
+              <span class="printer-led-text">READY</span>
+            </div>
+            <div class="printer-brand">LOVE RECEIPT • POS-2010</div>
+            <div class="printer-power-icon">⚡</div>
+          </div>
+
+          <button id="print-receipt-btn" type="button" class="print-receipt-btn">
+            🧾 Bấm In Hoá Đơn Đặc Quyền
+          </button>
+
+          <div class="printer-paper-slot">
+            <div class="printer-slot-inner"></div>
+          </div>
+        </div>
+
+        <!-- Ejecting Thermal Receipt Paper -->
+        <div id="receipt-paper-viewport" class="receipt-paper-viewport">
+          <div id="thermal-receipt-paper" class="thermal-receipt-paper">
+            <div class="receipt-zigzag-top"></div>
+
+            <div class="receipt-content">
+              <div class="receipt-shop-name">TIỆM TẠP HOÁ TÌNH YÊU</div>
+              <div class="receipt-shop-sub">Chi nhánh: 20/10 — Dành riêng cho Em</div>
+              <div class="receipt-meta">
+                <span>Mã HĐ: #2503-2010</span>
+                <span id="receipt-time-label">20/10/2026</span>
+              </div>
+              <div class="receipt-meta">
+                <span>Thu ngân: Việt Chu</span>
+                <span>Khách VIP: Em Yêu ❤️</span>
+              </div>
+
+              <div class="receipt-divider">----------------------------------------</div>
+
+              <div class="receipt-table">
+                <div class="r-row r-head">
+                  <span>HẠNG MỤC</span>
+                  <span>THÀNH TIỀN</span>
+                </div>
+                <div class="r-row">
+                  <span>01x Bên nhau từ 25/03/2026</span>
+                  <span id="receipt-days-val">209 ngày</span>
+                </div>
+                <div class="r-row">
+                  <span>99x Mặt quạu nhưng vẫn cưng</span>
+                  <span>0đ (Miễn phí)</span>
+                </div>
+                <div class="r-row">
+                  <span>01x Buổi hẹn hò đi chơi bù</span>
+                  <span>Đã ghi sổ</span>
+                </div>
+                <div class="r-row r-highlight">
+                  <span id="receipt-wheel-item">01x Quà Vòng Quay: (Chưa quay)</span>
+                  <span>0đ (Tặng em)</span>
+                </div>
+                <div class="r-row">
+                  <span>∞ x Nhường nhịn & chiều chuộng</span>
+                  <span>Trọn gói</span>
+                </div>
+              </div>
+
+              <div class="receipt-divider">----------------------------------------</div>
+
+              <div class="receipt-total-block">
+                <div class="r-total-row">
+                  <span>TỔNG THANH TOÁN:</span>
+                  <span>1 Nụ Cười Tươi 😊</span>
+                </div>
+                <div class="r-total-sub">Hạn sử dụng hoá đơn: Mãi mãi</div>
+              </div>
+
+              <!-- Red Rubber Stamp Target Area -->
+              <div class="receipt-stamp-zone">
+                <div id="red-rubber-stamp" class="red-rubber-stamp">
+                  <span class="stamp-top">★ ĐÃ CHỐT ĐƠN 20/10 ★</span>
+                  <span class="stamp-main">VIỆT CHU XÁC NHẬN</span>
+                  <span class="stamp-sub">Có giá trị quy đổi 100%</span>
+                </div>
+              </div>
+
+              <!-- Barcode -->
+              <div class="receipt-barcode"></div>
+              <div class="receipt-barcode-num">* 25032026 - 20102026 *</div>
+            </div>
+
+            <div class="receipt-zigzag-bottom"></div>
+          </div>
+        </div>
+
+        <!-- Stamp Action Bar -->
+        <div id="receipt-actions" class="receipt-actions" style="display: none;">
+          <button id="stamp-receipt-btn" type="button" class="btn-primary">
+            💮 Bấm Đóng Dấu "CHỐT ĐƠN"
+          </button>
+          <p id="stamp-hint-text" class="stamp-hint-text">
+            Đóng dấu xong nhớ chụp màn hình hoá đơn này gửi cho anh để nhận quà nha! 📸
+          </p>
+        </div>
+      </div>
+    </section>
+
     <!-- 8. Secret Gift Box & Voucher Section -->
     <section class="gift-section">
       <h3 id="secret-title" class="section-title" style="font-size: 2rem;">
