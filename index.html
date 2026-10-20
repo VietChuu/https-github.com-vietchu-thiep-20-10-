@@ -318,7 +318,38 @@
       </div>
     </section>
 
-    <!-- 7. Secret Gift Box & Voucher Section -->
+    <!-- 7. Interactive Lucky Spin Wheel ("Vòng Quay Đặc Quyền 20/10") -->
+    <section id="wheel-section" class="wheel-section">
+      <div class="wheel-card-box">
+        <h3 id="wheel-title" class="section-title" style="font-size: 2rem;">
+          Vòng Quay Đặc Quyền 20/10 🎡
+        </h3>
+        <p id="wheel-subtitle" class="section-subtitle" style="margin-bottom: 24px;">
+          Quay trúng ô nào anh thực hiện ô đó nha! Bấm nút QUAY ở giữa vòng tròn để thử vận may nhé!
+        </p>
+
+        <div class="wheel-stage">
+          <!-- Top Pointer -->
+          <div id="wheel-pointer" class="wheel-pointer">▼</div>
+
+          <!-- Rotating Wheel Canvas -->
+          <div class="wheel-outer-ring">
+            <canvas id="lucky-wheel-canvas" width="320" height="320"></canvas>
+            <button id="wheel-spin-btn" type="button" class="wheel-spin-btn" aria-label="Quay vòng quay">
+              QUAY
+            </button>
+          </div>
+        </div>
+
+        <!-- Spin CTA & Prize Result Box -->
+        <div id="wheel-result-box" class="wheel-result-box">
+          <div id="wheel-result-badge" class="wheel-result-badge">🎉 CHÚC MỪNG EM ĐÃ QUAY TRÚNG 🎉</div>
+          <p id="wheel-result-text" class="wheel-result-text"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. Secret Gift Box & Voucher Section -->
     <section class="gift-section">
       <h3 id="secret-title" class="section-title" style="font-size: 2rem;">
         Lời Nhắn Nhỏ Cuối Thư 💌

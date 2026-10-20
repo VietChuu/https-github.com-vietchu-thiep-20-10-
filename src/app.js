@@ -42,6 +42,8 @@
   setText("scratch-badge", cfg.scratchSecretBadge);
   setText("jar-title", cfg.jarTitle);
   setText("jar-subtitle", cfg.jarSubtitle);
+  setText("wheel-title", cfg.wheelTitle);
+  setText("wheel-subtitle", cfg.wheelSubtitle);
   setText("secret-title", cfg.secretMessageTitle);
   setText("secret-body", cfg.secretMessageBody);
   setText("secret-voucher", cfg.secretVoucherText);
@@ -716,6 +718,132 @@
   if (jarNoteCard) {
     jarNoteCard.style.cursor = "pointer";
     jarNoteCard.addEventListener("click", pickNextStarNote);
+  }
+
+  // ==========================================================================
+  // 5D. INTERACTIVE LUCKY SPIN WHEEL ("VÒNG QUAY ĐẶC QUYỀN 20/10")
+  // ==========================================================================
+  const wheelCanvas = document.getElementById("lucky-wheel-canvas");
+  const wheelSpinBtn = document.getElementById("wheel-spin-btn");
+  const wheelResultBox = document.getElementById("wheel-result-box");
+  const wheelResultText = document.getElementById("wheel-result-text");
+  const wheelPrizes = cfg.wheelPrizes || [];
+  let wheelRotation = 0;
+  let isWheelSpinning = false;
+  let spinCount = 0;
+
+  function playWheelTick(freq = 620) {
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContextClass) return;
+    if (!audioCtx) audioCtx = new AudioContextClass();
+    if (audioCtx.state === "suspended") audioCtx.resume();
+
+    const now = audioCtx.currentTime;
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.type = "triangle";
+    osc.frequency.setValueAtTime(freq, now);
+    osc.frequency.exponentialRampToValueAtTime(180, now + 0.035);
+    gain.gain.setValueAtTime(0.08, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.start(now);
+    osc.stop(now + 0.045);
+  }
+
+  function drawLuckyWheel() {
+    if (!wheelCanvas || !wheelPrizes.length) return;
+    const dpr = window.devicePixelRatio || 1;
+    const size = 320;
+    wheelCanvas.width = size * dpr;
+    wheelCanvas.height = size * dpr;
+    const wctx = wheelCanvas.getContext("2d");
+    wctx.scale(dpr, dpr);
+
+    const cx = size / 2;
+    const cy = size / 2;
+    const r = size / 2 - 4;
+    const n = wheelPrizes.length;
+    const arc = (Math.PI * 2) / n;
+
+    wctx.clearRect(0, 0, size, size);
+
+    wheelPrizes.forEach((prize, i) => {
+      // Slice 0 centered at -90deg (12 o'clock)
+      const startAngle = i * arc - Math.PI / 2 - arc / 2;
+      const endAngle = startAngle + arc;
+
+      wctx.beginPath();
+      wctx.moveTo(cx, cy);
+      wctx.arc(cx, cy, r, startAngle, endAngle);
+      wctx.closePath();
+      wctx.fillStyle = prize.color || (i % 2 === 0 ? "#ffccd5" : "#fff0f3");
+      wctx.fill();
+      wctx.lineWidth = 2;
+      wctx.strokeStyle = "#ffffff";
+      wctx.stroke();
+
+      // Label text along the radius
+      wctx.save();
+      wctx.translate(cx, cy);
+      wctx.rotate(startAngle + arc / 2);
+      wctx.textAlign = "right";
+      wctx.fillStyle = "#590d22";
+      wctx.font = "700 13.5px 'Be Vietnam Pro', sans-serif";
+      wctx.fillText(prize.label, r - 18, 5);
+      wctx.restore();
+    });
+  }
+
+  function spinLuckyWheel() {
+    if (isWheelSpinning || !wheelPrizes.length || !wheelCanvas) return;
+    isWheelSpinning = true;
+
+    const n = wheelPrizes.length;
+    const sliceDeg = 360 / n;
+    // Pick a prize (cycle through all prizes shuffled or random)
+    const targetIdx = (spinCount + Math.floor(Math.random() * n)) % n;
+    spinCount++;
+
+    const targetMod = (360 - targetIdx * sliceDeg) % 360;
+    const currentMod = ((wheelRotation % 360) + 360) % 360;
+    let delta = targetMod - currentMod;
+    if (delta < 0) delta += 360;
+
+    const jitter = (Math.random() - 0.5) * (sliceDeg * 0.45);
+    const fullSpins = (5 + Math.floor(Math.random() * 2)) * 360;
+    wheelRotation += fullSpins + delta + jitter;
+
+    wheelCanvas.style.transform = `rotate(${wheelRotation}deg)`;
+
+    // Schedule deceleration tick sounds
+    const tickDelays = [120, 260, 420, 600, 820, 1080, 1380, 1740, 2160, 2650, 3220, 3850];
+    tickDelays.forEach((ms) => {
+      setTimeout(() => playWheelTick(640), ms);
+    });
+
+    setTimeout(() => {
+      isWheelSpinning = false;
+      const won = wheelPrizes[targetIdx];
+      if (wheelResultText) wheelResultText.textContent = won.detail || won.label;
+      if (wheelResultBox) {
+        wheelResultBox.classList.remove("active");
+        void wheelResultBox.offsetWidth;
+        wheelResultBox.classList.add("active");
+      }
+      playWheelTick(880);
+      spawnKissHearts(22);
+    }, 4250);
+  }
+
+  drawLuckyWheel();
+  if (wheelSpinBtn) {
+    wheelSpinBtn.addEventListener("click", spinLuckyWheel);
+  }
+  if (wheelCanvas) {
+    wheelCanvas.style.cursor = "pointer";
+    wheelCanvas.addEventListener("click", spinLuckyWheel);
   }
 
   // ==========================================================================

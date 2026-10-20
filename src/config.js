@@ -94,7 +94,43 @@ window.CARD_CONFIG = {
     "Ngôi sao đặc biệt: Anh nợ em một buổi đi chơi bù thật vui, nhớ chụp màn hình ngôi sao này để đòi nha! 🎟️💖"
   ],
 
-  // 8. Lời nhắn bất ngờ cuối trang
+  // 8. Vòng Quay Đặc Quyền 20/10 (Lucky Spin Wheel)
+  wheelTitle: "Vòng Quay Đặc Quyền 20/10 🎡",
+  wheelSubtitle: "Quay trúng ô nào anh thực hiện ô đó nha! Bấm nút QUAY ở giữa vòng tròn để thử vận may nhé!",
+  wheelPrizes: [
+    {
+      label: "🛵 Đèo đi dạo",
+      color: "#ffccd5",
+      detail: "Trúng đặc quyền: Được anh đèo đi lượn phố hóng gió mát rượi, vừa đi vừa tám đủ thứ chuyện! 🛵🌆"
+    },
+    {
+      label: "🤗 100 cái ôm",
+      color: "#fff0f3",
+      detail: "Trúng đặc quyền: Nhận ngay 100 cái ôm thật chặt bất cứ lúc nào gặp nhau (không giới hạn thời hạn)! 🤗💖"
+    },
+    {
+      label: "👑 Luôn thắng",
+      color: "#ffb3c6",
+      detail: "Đặc quyền tối thượng: Anh tự giác nhường em thắng trong mọi cuộc tranh luận! 👑😆"
+    },
+    {
+      label: "🤏 Véo má anh",
+      color: "#ffe5ec",
+      detail: "Trúng đặc quyền: Cho phép em véo má hoặc trêu anh thoải mái mà anh vẫn phải cười tươi! 🤏😂"
+    },
+    {
+      label: "🎟️ Đi chơi bù",
+      color: "#ffccd5",
+      detail: "Giải đặc biệt: 1 buổi hẹn hò đi chơi bù thật vui do em toàn quyền chọn địa điểm! 🎟️✨"
+    },
+    {
+      label: "💌 Làm hoà ngay",
+      color: "#fff0f3",
+      detail: "Thẻ bài yêu thương: Dù ai có lỡ dỗi hay quạu thì cũng phải nắm tay làm hoà ngay lập tức! 💌🌷"
+    }
+  ],
+
+  // 9. Lời nhắn bất ngờ cuối trang
   secretMessageTitle: "Lời Nhắn Nhỏ Cuối Thư 💌",
   secretMessageBody: "Ngày 20/10 nhớ cười thật nhiều và luôn tươi tắn nhé! Cảm ơn em vì lúc nào cũng hiểu chuyện và đồng hành cùng anh. Hẹn em một buổi đi chơi bù thật vui nha! 🤗💖",
   secretVoucherText: "ĐẶC QUYỀN CỦA EM: 1000 cái ôm thật chặt, luôn được anh nhường nhịn & 1 buổi hẹn hò bù thật xịn (Hạn sử dụng: Mãi mãi)",
