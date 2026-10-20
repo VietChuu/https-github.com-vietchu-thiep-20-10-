@@ -93,7 +93,17 @@ window.CARD_CONFIG = {
     }
   ],
 
-  // 6. Lời nhắn bất ngờ cuối trang
+  // 6. Thẻ Cào Bí Mật (Scratch Card)
+  scratchTitle: "Thẻ Cào Bí Mật 20/10 ✨",
+  scratchSubtitle: "Dùng ngón tay hoặc chuột cào lớp nhũ lấp lánh bên dưới để mở điều anh giấu bên trong nhé!",
+  scratchCoverText: "✨ CÀO NHẸ TẠI ĐÂY ✨",
+  scratchCoverSubtext: "Vuốt qua lại để mở bí mật 💌",
+  scratchImage: "assets/photos/1792466461888_2199372916196262329_2672750711596410923_h.jpg",
+  scratchSecretHeadline: "Bắt quả tang một người đáng yêu! 🥰",
+  scratchSecretMessage: "Hôm nay chưa kịp chuẩn bị điều gì thật lớn lao, nhưng tình cảm anh dành cho em lúc nào cũng đong đầy. Cảm ơn em đã luôn bên anh nhé!",
+  scratchSecretBadge: "🎟️ Đặc quyền: 1 buổi đi chơi bù thật vui & 1000 cái ôm",
+
+  // 7. Lời nhắn bất ngờ cuối trang
   secretMessageTitle: "Lời Nhắn Nhỏ Cuối Thư 💌",
   secretMessageBody: "Ngày 20/10 nhớ cười thật nhiều và luôn tươi tắn nhé! Cảm ơn em vì lúc nào cũng hiểu chuyện và đồng hành cùng anh. Hẹn em một buổi đi chơi bù thật vui nha! 🤗💖",
   secretVoucherText: "ĐẶC QUYỀN CỦA EM: 1000 cái ôm thật chặt, luôn được anh nhường nhịn & 1 buổi hẹn hò bù thật xịn (Hạn sử dụng: Mãi mãi)",

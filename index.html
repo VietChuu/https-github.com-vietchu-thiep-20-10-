@@ -168,7 +168,43 @@
       </div>
     </section>
 
-    <!-- 5. Secret Gift Box & Voucher Section -->
+    <!-- 5. Interactive Scratch Card ("Thẻ Cào Bí Mật") -->
+    <section id="scratch-section" class="scratch-section">
+      <div class="scratch-card-box">
+        <h3 id="scratch-title" class="section-title" style="font-size: 2rem;">
+          Thẻ Cào Bí Mật 20/10 ✨
+        </h3>
+        <p id="scratch-subtitle" class="section-subtitle" style="margin-bottom: 20px;">
+          Dùng ngón tay hoặc chuột cào lớp nhũ lấp lánh bên dưới để mở điều anh giấu bên trong nhé!
+        </p>
+
+        <div id="scratch-container" class="scratch-container">
+          <!-- Hidden Prize Layer Underneath -->
+          <div class="scratch-prize">
+            <img id="scratch-img" class="scratch-prize-img" src="assets/photos/1792466461888_2199372916196262329_2672750711596410923_h.jpg" alt="Kỷ niệm bí mật" />
+            <h4 id="scratch-headline" class="scratch-headline">Bắt quả tang một người đáng yêu! 🥰</h4>
+            <p id="scratch-msg" class="scratch-msg">
+              Hôm nay chưa kịp chuẩn bị điều gì thật lớn lao, nhưng tình cảm anh dành cho em lúc nào cũng đong đầy. Cảm ơn em đã luôn bên anh nhé!
+            </p>
+            <div id="scratch-badge" class="scratch-badge">
+              🎟️ Đặc quyền: 1 buổi đi chơi bù thật vui & 1000 cái ôm
+            </div>
+          </div>
+
+          <!-- Foil Canvas Layer On Top -->
+          <canvas id="scratch-canvas" class="scratch-canvas"></canvas>
+        </div>
+
+        <div class="scratch-footer">
+          <span id="scratch-progress-text" class="scratch-progress-text">Đã cào: 0%</span>
+          <button id="scratch-reset-btn" type="button" class="scratch-reset-btn">
+            Phủ nhũ cào lại 🔄
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Secret Gift Box & Voucher Section -->
     <section class="gift-section">
       <h3 id="secret-title" class="section-title" style="font-size: 2rem;">
         Lời Nhắn Nhỏ Cuối Thư 💌

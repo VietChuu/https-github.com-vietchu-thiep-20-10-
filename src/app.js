@@ -35,9 +35,17 @@
   setText("quiz-prompt", cfg.loveQuestionPrompt);
   setText("btn-love-yes", cfg.loveYesText);
   setText("quiz-success-msg", cfg.loveSuccessMessage);
+  setText("scratch-title", cfg.scratchTitle);
+  setText("scratch-subtitle", cfg.scratchSubtitle);
+  setText("scratch-headline", cfg.scratchSecretHeadline);
+  setText("scratch-msg", cfg.scratchSecretMessage);
+  setText("scratch-badge", cfg.scratchSecretBadge);
   setText("secret-title", cfg.secretMessageTitle);
   setText("secret-body", cfg.secretMessageBody);
   setText("secret-voucher", cfg.secretVoucherText);
+
+  const scratchImgEl = document.getElementById("scratch-img");
+  if (scratchImgEl && cfg.scratchImage) scratchImgEl.src = cfg.scratchImage;
 
   const avatarLeft = document.getElementById("couple-avatar-left");
   const avatarRight = document.getElementById("couple-avatar-right");
@@ -197,6 +205,7 @@
       mainContent.classList.add("visible");
       window.scrollTo({ top: 0, behavior: "smooth" });
       renderLetterTypewriter();
+      initScratchCard();
     }, 1050);
   }
 
@@ -347,6 +356,164 @@
       if (quizEmoji) quizEmoji.textContent = "🥰";
       quizSuccessBox.classList.add("active");
       spawnKissHearts(28);
+    });
+  }
+
+  // ==========================================================================
+  // 5B. INTERACTIVE SCRATCH CARD ("THẺ CÀO BÍ MẬT")
+  // ==========================================================================
+  const scratchCanvas = document.getElementById("scratch-canvas");
+  const scratchContainer = document.getElementById("scratch-container");
+  const scratchProgressText = document.getElementById("scratch-progress-text");
+  const scratchResetBtn = document.getElementById("scratch-reset-btn");
+  let isScratching = false;
+  let scratchRevealed = false;
+  let lastScratchPt = null;
+
+  function drawScratchCover() {
+    if (!scratchCanvas || !scratchContainer) return;
+    const rect = scratchContainer.getBoundingClientRect();
+    const w = Math.max(300, Math.floor(rect.width || 380));
+    const h = Math.max(340, Math.floor(rect.height || 360));
+    scratchCanvas.width = w;
+    scratchCanvas.height = h;
+
+    const sctx = scratchCanvas.getContext("2d");
+    sctx.globalCompositeOperation = "source-over";
+
+    // Metallic Rose-Gold & Silver Shimmer Gradient
+    const grad = sctx.createLinearGradient(0, 0, w, h);
+    grad.addColorStop(0, "#f4acb7");
+    grad.addColorStop(0.25, "#ffcad4");
+    grad.addColorStop(0.5, "#fde2e4");
+    grad.addColorStop(0.75, "#f4acb7");
+    grad.addColorStop(1, "#e5989b");
+    sctx.fillStyle = grad;
+    sctx.fillRect(0, 0, w, h);
+
+    // Decorative Sparkle Dots on Foil
+    for (let i = 0; i < 65; i++) {
+      sctx.fillStyle = i % 2 === 0 ? "rgba(255, 255, 255, 0.7)" : "rgba(201, 24, 74, 0.18)";
+      sctx.beginPath();
+      sctx.arc(Math.random() * w, Math.random() * h, 1.5 + Math.random() * 3, 0, Math.PI * 2);
+      sctx.fill();
+    }
+
+    // Inner Dashed Border
+    sctx.strokeStyle = "rgba(128, 15, 47, 0.35)";
+    sctx.lineWidth = 2;
+    sctx.setLineDash([8, 6]);
+    sctx.strokeRect(16, 16, w - 32, h - 32);
+    sctx.setLineDash([]);
+
+    // Center Call-to-Action Text
+    sctx.fillStyle = "#800f2f";
+    sctx.font = "bold 22px 'Be Vietnam Pro', sans-serif";
+    sctx.textAlign = "center";
+    sctx.fillText(cfg.scratchCoverText || "✨ CÀO NHẸ TẠI ĐÂY ✨", w / 2, h / 2 - 8);
+
+    sctx.fillStyle = "#9e2a5b";
+    sctx.font = "500 14px 'Be Vietnam Pro', sans-serif";
+    sctx.fillText(cfg.scratchCoverSubtext || "Dùng ngón tay hoặc chuột vuốt qua lại 💌", w / 2, h / 2 + 22);
+
+    scratchCanvas.classList.remove("revealed");
+    scratchRevealed = false;
+    if (scratchProgressText) scratchProgressText.textContent = "Đã cào: 0%";
+  }
+
+  function getScratchCoords(e) {
+    const rect = scratchCanvas.getBoundingClientRect();
+    const scaleX = scratchCanvas.width / rect.width;
+    const scaleY = scratchCanvas.height / rect.height;
+    return {
+      x: (e.clientX - rect.left) * scaleX,
+      y: (e.clientY - rect.top) * scaleY
+    };
+  }
+
+  function checkScratchPercent() {
+    if (!scratchCanvas || scratchRevealed) return;
+    const sctx = scratchCanvas.getContext("2d");
+    const { width, height } = scratchCanvas;
+    const imgData = sctx.getImageData(0, 0, width, height).data;
+    let cleared = 0;
+    const step = 16; // sample every 4th pixel for fast performance
+    const totalSampled = Math.floor(imgData.length / step);
+
+    for (let i = 3; i < imgData.length; i += step) {
+      if (imgData[i] < 128) cleared++;
+    }
+
+    const pct = Math.min(100, Math.round((cleared / totalSampled) * 100));
+    if (scratchProgressText) {
+      scratchProgressText.textContent = `Đã cào: ${pct}%`;
+    }
+
+    if (pct >= 46 && !scratchRevealed) {
+      scratchRevealed = true;
+      scratchCanvas.classList.add("revealed");
+      if (scratchProgressText) {
+        scratchProgressText.textContent = "🎉 Đã mở khoá bí mật 100%! 💖";
+      }
+      spawnKissHearts(24);
+    }
+  }
+
+  function scratchAt(pt) {
+    if (!scratchCanvas || scratchRevealed) return;
+    const sctx = scratchCanvas.getContext("2d");
+    sctx.globalCompositeOperation = "destination-out";
+    sctx.lineWidth = 46;
+    sctx.lineCap = "round";
+    sctx.lineJoin = "round";
+
+    sctx.beginPath();
+    if (lastScratchPt) {
+      sctx.moveTo(lastScratchPt.x, lastScratchPt.y);
+      sctx.lineTo(pt.x, pt.y);
+    } else {
+      sctx.arc(pt.x, pt.y, 23, 0, Math.PI * 2);
+    }
+    sctx.stroke();
+    lastScratchPt = pt;
+  }
+
+  function initScratchCard() {
+    if (!scratchCanvas) return;
+    drawScratchCover();
+  }
+
+  if (scratchCanvas) {
+    scratchCanvas.addEventListener("pointerdown", (e) => {
+      isScratching = true;
+      lastScratchPt = null;
+      scratchAt(getScratchCoords(e));
+    });
+
+    let scratchMoveTicks = 0;
+    scratchCanvas.addEventListener("pointermove", (e) => {
+      if (!isScratching) return;
+      scratchAt(getScratchCoords(e));
+      scratchMoveTicks++;
+      if (scratchMoveTicks % 10 === 0) {
+        checkScratchPercent();
+      }
+    });
+
+    const endScratch = () => {
+      if (!isScratching) return;
+      isScratching = false;
+      lastScratchPt = null;
+      checkScratchPercent();
+    };
+
+    window.addEventListener("pointerup", endScratch);
+    window.addEventListener("pointercancel", endScratch);
+  }
+
+  if (scratchResetBtn) {
+    scratchResetBtn.addEventListener("click", () => {
+      drawScratchCover();
     });
   }
 
