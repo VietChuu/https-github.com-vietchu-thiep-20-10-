@@ -20,45 +20,52 @@ window.CARD_CONFIG = {
   ],
   letterClosing: "Trọn đời thương em,",
 
-  // 3. Thư viện ảnh kỷ niệm Polaroid (Thay ảnh của 2 bạn vào thư mục assets/photos/)
+  // 3. Thư viện ảnh kỷ niệm Polaroid của 2 bạn
   galleryTitle: "Khoảnh Khắc Của Chúng Mình",
-  gallerySubtitle: "Mỗi bức ảnh là một mảnh ghép hạnh phúc khi có em bên cạnh",
+  gallerySubtitle: "Mỗi bức ảnh là một mảnh ghép hạnh phúc khi có em bên cạnh (Chạm vào ảnh để xem rõ hơn nhé)",
   photos: [
     {
-      src: "assets/photos/photo-1.svg",
-      caption: "Nụ cười của em làm tim anh tan chảy 💕",
-      date: "Kỷ niệm ngọt ngào",
-      rotation: "-3deg"
+      src: "assets/photos/1792466461888_2199372916196262329_2672750711596410923_h.jpg",
+      caption: "Ngại ngùng cười tít mắt bên nhau dưới trời đêm ✨",
+      date: "Đêm bình yên bên em",
+      rotation: "-2.5deg",
+      position: "center center"
     },
     {
-      src: "assets/photos/photo-2.svg",
-      caption: "Những buổi hẹn hò bình yên bên nhau ✨",
-      date: "Ngày nắng đẹp",
-      rotation: "2.5deg"
+      src: "assets/photos/1792466461917_2199372916196262329_2672750711596410923_h.jpg",
+      caption: "Vi vu khắp phố phường & cùng nhau đi làm gốm 🛵🏺",
+      date: "Kỷ niệm đáng nhớ",
+      rotation: "2.2deg",
+      position: "center center"
     },
     {
-      src: "assets/photos/photo-3.svg",
-      caption: "Nắm tay em đi qua bao mùa yêu thương 🌸",
-      date: "Bên em mãi mãi",
-      rotation: "-2deg"
-    },
-    {
-      src: "assets/photos/photo-4.svg",
-      caption: "Cô gái xinh đẹp nhất trong mắt anh 🌷",
-      date: "20/10 Hạnh phúc",
-      rotation: "3deg"
-    },
-    {
-      src: "assets/photos/photo-5.svg",
-      caption: "Cảm ơn em vì đã luôn ở bên anh ❤️",
+      src: "assets/photos/1792466461944_2199372916196262329_2672750711596410923_h.jpg",
+      caption: "Tựa đầu vào nhau, thế giới bỗng hoá dịu dàng 💕",
       date: "Thương em thật nhiều",
-      rotation: "-2.5deg"
+      rotation: "-2deg",
+      position: "center 85%"
     },
     {
-      src: "assets/photos/photo-6.svg",
-      caption: "Viết tiếp thật nhiều kỷ niệm cùng nhau nhé 🥂",
-      date: "Chặng đường phía trước",
-      rotation: "2deg"
+      src: "assets/photos/1792466461969_2199372916196262329_2672750711596410923_h.jpg",
+      caption: "Biểu cảm đáng yêu số một của hai đứa mình 😘",
+      date: "Khoảnh khắc nhí nhố",
+      rotation: "2.8deg",
+      position: "center 60%"
+    },
+    {
+      src: "assets/photos/1792466461995_2199372916196262329_2672750711596410923_h.jpg",
+      caption: "Nắm tay em đi dạo chơi khắp thế gian ✌️💖",
+      date: "Ngày hẹn hò vui vẻ",
+      rotation: "-2.5deg",
+      position: "center 65%"
+    },
+    {
+      src: "assets/photos/1792466462019_2199372916196262329_2672750711596410923_h.jpg",
+      caption: "Mỗi khung hình bên em đều tràn ngập tiếng cười 🌷",
+      date: "20/10 Hạnh phúc",
+      rotation: "2deg",
+      fit: "contain",
+      position: "center center"
     }
   ],
 
@@ -68,7 +75,6 @@ window.CARD_CONFIG = {
   secretVoucherText: "VOUCHER TÌNH YÊU: 1 buổi hẹn hò lãng mạn & bất kỳ món ăn nào em thích (Hạn sử dụng: Mãi mãi)",
 
   // 5. Đường dẫn nhạc nền (để trống sẽ dùng giai điệu Music Box lãng mạn tích hợp sẵn)
-  // Bạn có thể chép file nhạc .mp3 vào thư mục assets/music.mp3 rồi điền "assets/music.mp3"
   customMusicUrl: "",
 
   // 6. Đường dẫn trang thiệp sau khi deploy (dùng để tạo QR)

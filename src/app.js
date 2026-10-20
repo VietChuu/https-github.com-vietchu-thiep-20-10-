@@ -224,9 +224,14 @@
     card.className = "polaroid-card";
     card.style.setProperty("--rot", photo.rotation || (idx % 2 === 0 ? "-2.5deg" : "2.5deg"));
 
+    const imgStyle = [
+      photo.fit ? `object-fit: ${photo.fit};` : "",
+      photo.position ? `object-position: ${photo.position};` : ""
+    ].filter(Boolean).join(" ");
+
     card.innerHTML = `
       <div class="polaroid-img-wrap">
-        <img src="${photo.src}" alt="${photo.caption || 'Kỷ niệm'}" loading="lazy" />
+        <img src="${photo.src}" alt="${photo.caption || 'Kỷ niệm'}" loading="lazy" style="${imgStyle}" />
       </div>
       <div class="polaroid-caption">${photo.caption || ""}</div>
       <span class="polaroid-date">${photo.date || ""}</span>

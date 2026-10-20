@@ -585,10 +585,10 @@ body {
 
 .polaroid-img-wrap {
   width: 100%;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 4 / 4.8;
   overflow: hidden;
-  border-radius: 3px;
-  background: #fff0f3;
+  border-radius: 4px;
+  background: #fff5f7;
   margin-bottom: 14px;
   position: relative;
 }
