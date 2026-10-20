@@ -27,7 +27,7 @@ window.CARD_CONFIG = {
     "Với anh, có em bên cạnh là điều bình yên và may mắn nhất. Chúc cô gái của anh ngày 20/10 và cả những ngày sau nữa lúc nào cũng vui vẻ, tươi tắn và hạnh phúc nhé.",
     "Dù thế giới ngoài kia có bận rộn thế nào, hãy nhớ rằng luôn có anh ở đây thương em, chiều chuộng và đồng hành cùng em qua mọi chặng đường. Yêu em rất nhiều!"
   ],
-  letterClosing: "Trọn đời thương em,",
+  letterClosing: "Thương em nhiều,",
 
   // 4. Mini-game tương tác "Em có yêu anh không?"
   loveQuestionTitle: "Câu Hỏi Quan Trọng Ngày 20/10 😳",
