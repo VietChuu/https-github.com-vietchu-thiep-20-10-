@@ -109,9 +109,9 @@ window.CARD_CONFIG = {
       detail: "Quay trúng: 1 buổi đi xem phim cùng nhau vào đợt tới — em toàn quyền chọn bộ phim em muốn xem! 🎬🍿"
     },
     {
-      label: "🛍️ Đi lựa đồ cùng",
+      label: "👗 Tặng 1 bộ đồ",
       color: "#ffb3c6",
-      detail: "Quay trúng: Đi dạo, đi lựa đồ cùng em — cam kết tư vấn có tâm, xách đồ phụ và tuyệt đối không hối về! 🛍️😊"
+      detail: "Quay trúng: Đi lựa đồ cùng nhau và anh sẽ mua tặng em 1 bộ đồ thật xinh vào đợt tới nha! 👗🛍️💖"
     },
     {
       label: "📦 Chốt 1 món nhỏ",
