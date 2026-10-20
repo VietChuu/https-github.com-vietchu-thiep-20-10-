@@ -98,9 +98,9 @@ window.CARD_CONFIG = {
   scratchSubtitle: "Dùng ngón tay hoặc chuột cào lớp nhũ lấp lánh bên dưới để mở điều anh giấu bên trong nhé!",
   scratchCoverText: "✨ CÀO NHẸ TẠI ĐÂY ✨",
   scratchCoverSubtext: "Vuốt qua lại để mở bí mật 💌",
-  scratchImage: "assets/photos/1792466461888_2199372916196262329_2672750711596410923_h.jpg",
-  scratchSecretHeadline: "Bắt quả tang một người đáng yêu! 🥰",
-  scratchSecretMessage: "Hôm nay chưa kịp chuẩn bị điều gì thật lớn lao, nhưng tình cảm anh dành cho em lúc nào cũng đong đầy. Cảm ơn em đã luôn bên anh nhé!",
+  scratchImage: "assets/photos/1792471660428_2199372916196262329_2672750711596410923_h.jpg",
+  scratchSecretHeadline: "Bắt quả tang một chiếc mặt quạu siêu cấp đáng yêu! 🐻‍❄️😆",
+  scratchSecretMessage: "Nhìn mặt kìa, dỗi hay nhăn mặt nhìn vẫn cứ là cưng nhất quả đất! Ngày 20/10 bớt quạu với anh lại nha, thương nhiều lắm! ❤️",
   scratchSecretBadge: "🎟️ Đặc quyền: 1 buổi đi chơi bù thật vui & 1000 cái ôm",
 
   // 7. Lời nhắn bất ngờ cuối trang
