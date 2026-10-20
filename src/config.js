@@ -44,53 +44,28 @@ window.CARD_CONFIG = {
   ],
   loveSuccessMessage: "Biết ngay là không bấm nút kia được mà 😆 Cảm ơn em vì đã luôn ở bên cạnh và thông cảm cho anh. Thương em nhiều lắm, cứ mãi vui vẻ bên nhau như vậy nha! ❤️",
 
-  // 5. Máy Ảnh Instax & Thư Viện Ảnh Kỷ Niệm của 2 bạn
-  galleryTitle: "Máy Ảnh Kỷ Niệm Của Chúng Mình 📸",
-  gallerySubtitle: "Bấm nút chụp trên máy ảnh Instax bên dưới để in từng tấm hình kỷ niệm của hai đứa nhé!",
+  // 5. Máy Ảnh Instax & Album Ảnh Kỷ Niệm (Tự động hiển thị full khung ngang/dọc, không cần chú thích từng ảnh)
+  galleryTitle: "Khoảnh Khắc Của Chúng Mình 📸",
+  gallerySubtitle: "Bấm máy ảnh để chụp ngẫu nhiên, lướt cuộn phim hoặc chạm vào bất kỳ tấm ảnh nào để xem trọn vẹn nhé!",
   photos: [
-    {
-      src: "assets/photos/1792466461888_2199372916196262329_2672750711596410923_h.jpg",
-      caption: "Ngại ngùng cười tít mắt bên nhau dưới trời đêm ✨",
-      date: "Đêm bình yên bên em",
-      rotation: "-2.5deg",
-      position: "center center"
-    },
-    {
-      src: "assets/photos/1792466461917_2199372916196262329_2672750711596410923_h.jpg",
-      caption: "Vi vu khắp phố phường & cùng nhau đi làm gốm 🛵🏺",
-      date: "Kỷ niệm đáng nhớ",
-      rotation: "2.2deg",
-      position: "center center"
-    },
-    {
-      src: "assets/photos/1792466461944_2199372916196262329_2672750711596410923_h.jpg",
-      caption: "Tựa đầu vào nhau, thế giới bỗng hoá dịu dàng 💕",
-      date: "Thương em thật nhiều",
-      rotation: "-2deg",
-      position: "center 85%"
-    },
-    {
-      src: "assets/photos/1792466461969_2199372916196262329_2672750711596410923_h.jpg",
-      caption: "Biểu cảm đáng yêu số một của hai đứa mình 😘",
-      date: "Khoảnh khắc nhí nhố",
-      rotation: "2.8deg",
-      position: "center 60%"
-    },
-    {
-      src: "assets/photos/1792466461995_2199372916196262329_2672750711596410923_h.jpg",
-      caption: "Nắm tay em đi dạo chơi khắp thế gian ✌️💖",
-      date: "Ngày hẹn hò vui vẻ",
-      rotation: "-2.5deg",
-      position: "center 65%"
-    },
-    {
-      src: "assets/photos/1792466462019_2199372916196262329_2672750711596410923_h.jpg",
-      caption: "Mỗi khung hình bên em đều tràn ngập tiếng cười 🌷",
-      date: "20/10 Hạnh phúc",
-      rotation: "2deg",
-      fit: "contain",
-      position: "center center"
-    }
+    "assets/photos/1792466461888_2199372916196262329_2672750711596410923_h.jpg",
+    "assets/photos/1792466461917_2199372916196262329_2672750711596410923_h.jpg",
+    "assets/photos/1792466461944_2199372916196262329_2672750711596410923_h.jpg",
+    "assets/photos/1792466461969_2199372916196262329_2672750711596410923_h.jpg",
+    "assets/photos/1792466461995_2199372916196262329_2672750711596410923_h.jpg",
+    "assets/photos/1792466462019_2199372916196262329_2672750711596410923_h.jpg",
+    "assets/photos/1792472020633_2199372916196262329_2672750711596410923_h.jpg",
+    "assets/photos/1792483918730_2199372916196262329_2672750711596410923_h.jpg",
+    "assets/photos/1792483918784_2199372916196262329_2672750711596410923_h.jpg",
+    "assets/photos/1792483918831_2199372916196262329_2672750711596410923_h.jpg",
+    "assets/photos/1792483918859_2199372916196262329_2672750711596410923_h.jpg",
+    "assets/photos/1792483918932_2199372916196262329_2672750711596410923_h.jpg",
+    "assets/photos/1792483918957_2199372916196262329_2672750711596410923_h.jpg",
+    "assets/photos/1792483918983_2199372916196262329_2672750711596410923_h.jpg",
+    "assets/photos/1792483919037_2199372916196262329_2672750711596410923_h.jpg",
+    "assets/photos/1792483919062_2199372916196262329_2672750711596410923_h.jpg",
+    "assets/photos/1792483919088_2199372916196262329_2672750711596410923_h.jpg",
+    "assets/photos/1792483919112_2199372916196262329_2672750711596410923_h.jpg"
   ],
 
   // 6. Thẻ Cào Bí Mật (Scratch Card)

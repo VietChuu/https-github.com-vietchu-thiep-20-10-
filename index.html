@@ -129,12 +129,12 @@
       </div>
     </section>
 
-    <!-- 3. Interactive Instax Camera & Polaroid Photo Gallery Section -->
+    <!-- 3. Interactive Instax Camera + Cinema Film Reel + Full-Frame Masonry Gallery -->
     <section id="memory-gallery" class="gallery-section">
       <div class="section-heading">
-        <h2 id="gallery-title" class="section-title">Máy Ảnh Kỷ Niệm Của Chúng Mình 📸</h2>
+        <h2 id="gallery-title" class="section-title">Khoảnh Khắc Của Chúng Mình 📸</h2>
         <p id="gallery-subtitle" class="section-subtitle">
-          Bấm nút chụp trên máy ảnh Instax bên dưới để in từng tấm hình kỷ niệm của hai đứa nhé!
+          Bấm máy ảnh để in ảnh bất ngờ, lướt cuộn phim hoặc chạm vào bất kỳ tấm ảnh nào để xem trọn vẹn nhé!
         </p>
       </div>
 
@@ -148,12 +148,10 @@
           </div>
 
           <div class="instax-middle-row">
-            <!-- Shutter Button on Left Grip -->
             <button id="instax-shutter-btn" type="button" class="instax-shutter-btn" aria-label="Bấm chụp ảnh">
               <span class="shutter-ring">📸</span>
             </button>
 
-            <!-- Center Lens with Live Mini Preview -->
             <div id="instax-lens" class="instax-lens" role="button" tabindex="0" aria-label="Chạm ống kính để chụp">
               <div class="lens-inner">
                 <img id="lens-preview-img" src="assets/photos/1792466461888_2199372916196262329_2672750711596410923_h.jpg" alt="Preview" />
@@ -161,10 +159,9 @@
               </div>
             </div>
 
-            <!-- Film Counter LED -->
             <div class="instax-counter-panel">
-              <span class="counter-led-label">PHIM</span>
-              <span id="instax-film-count" class="counter-led-num">6</span>
+              <span class="counter-led-label">CUỘN PHIM</span>
+              <span id="instax-film-count" class="counter-led-num">18</span>
             </div>
           </div>
 
@@ -173,35 +170,42 @@
           </div>
         </div>
 
-        <!-- Ejecting Photo Tray (Slides out from bottom of camera) -->
+        <!-- Ejecting Photo Tray (Slides out from bottom of camera in natural aspect ratio) -->
         <div id="instax-eject-zone" class="instax-eject-zone">
           <div id="instax-developing-card" class="instax-developing-card">
-            <div class="polaroid-img-wrap">
+            <div class="instax-full-img-wrap">
               <img id="developing-img" src="" alt="Đang rửa ảnh" />
               <div id="developing-overlay" class="developing-overlay">
                 <span>✨ Đang hiện màu ảnh...</span>
               </div>
             </div>
-            <div id="developing-caption" class="polaroid-caption"></div>
-            <span id="developing-date" class="polaroid-date"></span>
+            <div class="instax-mini-footer">
+              <span id="developing-index-badge" class="instax-index-pill">#01 💕</span>
+              <span class="instax-zoom-hint">Chạm để phóng to 🔍</span>
+            </div>
           </div>
         </div>
 
         <div class="instax-controls">
           <button id="instax-shoot-cta" type="button" class="btn-primary">
-            📸 Bấm chụp tấm tiếp theo (1/6)
-          </button>
-          <button id="instax-print-all-btn" type="button" class="btn-secondary">
-            In nhanh cả 6 tấm ✨
+            📸 Bấm chụp ngẫu nhiên 1 tấm
           </button>
         </div>
       </div>
 
-      <!-- Developed Album Wall -->
-      <div id="album-wall-header" class="album-wall-header" style="display: none;">
-        <span class="album-wall-badge">🎞️ Dây ảnh kỷ niệm đã rửa (Chạm vào ảnh để phóng to)</span>
+      <!-- Smooth Auto-Scrolling Cinema Film Strip -->
+      <div class="film-strip-header">
+        <span class="album-wall-badge">🎞️ Cuộn phim kỷ niệm (Lướt nhẹ hoặc chạm vào ảnh để xem rõ)</span>
       </div>
-      <div id="polaroid-grid" class="polaroid-grid"></div>
+      <div class="film-reel-viewport">
+        <div id="film-reel-track" class="film-reel-track"></div>
+      </div>
+
+      <!-- Full-Frame Natural Masonry Collage (Zero Cropping, No Clunky Captions) -->
+      <div class="album-wall-header">
+        <span class="album-wall-badge">🖼️ Toàn bộ 18 khoảnh khắc (Hiển thị trọn khung hình gốc)</span>
+      </div>
+      <div id="polaroid-grid" class="masonry-photo-wall"></div>
     </section>
 
     <!-- 4. Interactive Runaway Button Quiz ("Em có yêu anh không?") -->

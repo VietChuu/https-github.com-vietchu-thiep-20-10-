@@ -253,10 +253,10 @@
   }
 
   // ==========================================================================
-  // 4. INTERACTIVE INSTAX CAMERA, PHOTO DEVELOPING & LIGHTBOX
+  // 4. INSTAX CAMERA + CINEMA FILM REEL + FULL-FRAME MASONRY + SWIPE LIGHTBOX
   // ==========================================================================
   const galleryGrid = document.getElementById("polaroid-grid");
-  const albumWallHeader = document.getElementById("album-wall-header");
+  const filmReelTrack = document.getElementById("film-reel-track");
   const lightbox = document.getElementById("lightbox-modal");
   const lightboxImg = document.getElementById("lightbox-img");
   const lightboxCaption = document.getElementById("lightbox-caption");
@@ -265,7 +265,6 @@
   const shutterBtn = document.getElementById("instax-shutter-btn");
   const instaxLens = document.getElementById("instax-lens");
   const shootCtaBtn = document.getElementById("instax-shoot-cta");
-  const printAllBtn = document.getElementById("instax-print-all-btn");
   const instaxFlash = document.getElementById("instax-flash");
   const filmCountEl = document.getElementById("instax-film-count");
   const lensPreviewImg = document.getElementById("lens-preview-img");
@@ -273,14 +272,16 @@
   const developingCard = document.getElementById("instax-developing-card");
   const developingImg = document.getElementById("developing-img");
   const developingOverlay = document.getElementById("developing-overlay");
-  const developingCaption = document.getElementById("developing-caption");
-  const developingDate = document.getElementById("developing-date");
+  const developingIndexBadge = document.getElementById("developing-index-badge");
+
+  // Normalize photos list (support string paths or objects)
+  const rawPhotos = cfg.photos || [];
+  const photos = rawPhotos.map((item) => (typeof item === "string" ? { src: item } : item));
+  const tagIcons = ["💕", "✨", "🌸", "💖", "🌷", "🥰"];
 
   let currentPhotoIdx = 0;
   let shotIndex = 0;
   let isShooting = false;
-  const photos = cfg.photos || [];
-  const printedSet = new Set();
 
   function playShutterSound() {
     const AudioContextClass = window.AudioContext || window.webkitAudioContext;
@@ -289,7 +290,6 @@
     if (audioCtx.state === "suspended") audioCtx.resume();
 
     const now = audioCtx.currentTime;
-    // Crisp shutter click
     const osc = audioCtx.createOscillator();
     const gain = audioCtx.createGain();
     osc.type = "triangle";
@@ -302,28 +302,28 @@
     osc.start(now);
     osc.stop(now + 0.07);
 
-    // Soft film motor whir
     const motorOsc = audioCtx.createOscillator();
     const motorGain = audioCtx.createGain();
     motorOsc.type = "sine";
     motorOsc.frequency.setValueAtTime(210, now + 0.08);
-    motorOsc.frequency.linearRampToValueAtTime(260, now + 0.48);
+    motorOsc.frequency.linearRampToValueAtTime(260, now + 0.45);
     motorGain.gain.setValueAtTime(0.001, now + 0.08);
     motorGain.gain.linearRampToValueAtTime(0.04, now + 0.14);
-    motorGain.gain.exponentialRampToValueAtTime(0.001, now + 0.52);
+    motorGain.gain.exponentialRampToValueAtTime(0.001, now + 0.48);
     motorOsc.connect(motorGain);
     motorGain.connect(audioCtx.destination);
     motorOsc.start(now + 0.08);
-    motorOsc.stop(now + 0.55);
+    motorOsc.stop(now + 0.5);
   }
 
   function openLightbox(index) {
     if (!photos.length) return;
     currentPhotoIdx = (index + photos.length) % photos.length;
     const item = photos[currentPhotoIdx];
+    const numStr = String(currentPhotoIdx + 1).padStart(2, "0");
     lightboxImg.src = item.src;
-    lightboxCaption.textContent = item.caption || "";
-    lightboxDate.textContent = item.date || "";
+    lightboxCaption.textContent = item.caption || `Khoảnh khắc #${numStr} 💕`;
+    lightboxDate.textContent = item.date || `Ảnh ${currentPhotoIdx + 1} / ${photos.length} (Vuốt ngang để chuyển ảnh)`;
     lightbox.classList.add("active");
   }
 
@@ -331,43 +331,45 @@
     lightbox.classList.remove("active");
   }
 
-  function createPolaroidCard(photo, idx, animateDeveloping = false) {
-    const card = document.createElement("div");
-    card.className = "polaroid-card";
-    card.style.setProperty("--rot", photo.rotation || (idx % 2 === 0 ? "-2.5deg" : "2.5deg"));
-
-    const imgStyle = [
-      photo.fit ? `object-fit: ${photo.fit};` : "",
-      photo.position ? `object-position: ${photo.position};` : ""
-    ].filter(Boolean).join(" ");
-
-    card.innerHTML = `
-      <div class="polaroid-img-wrap">
-        <img src="${photo.src}" alt="${photo.caption || 'Kỷ niệm'}" loading="lazy" style="${imgStyle}" class="${animateDeveloping ? 'developing' : ''}" />
-      </div>
-      <div class="polaroid-caption">${photo.caption || ""}</div>
-      <span class="polaroid-date">${photo.date || ""}</span>
-    `;
-
-    card.addEventListener("click", () => openLightbox(idx));
-    return card;
+  // 1. Render Cinema Film Reel (Smooth horizontal film strip)
+  if (filmReelTrack && photos.length) {
+    photos.forEach((photo, idx) => {
+      const frame = document.createElement("div");
+      frame.className = "film-frame";
+      frame.innerHTML = `<img src="${photo.src}" alt="Kỷ niệm ${idx + 1}" loading="lazy" />`;
+      frame.addEventListener("click", () => openLightbox(idx));
+      filmReelTrack.appendChild(frame);
+    });
   }
 
+  // 2. Render Full-Frame Masonry Wall (100% natural aspect ratio, zero cropping, no clunky text)
+  if (galleryGrid && photos.length) {
+    photos.forEach((photo, idx) => {
+      const numStr = String(idx + 1).padStart(2, "0");
+      const icon = tagIcons[idx % tagIcons.length];
+      const item = document.createElement("div");
+      item.className = "masonry-item";
+      item.innerHTML = `
+        <img src="${photo.src}" alt="Kỷ niệm #${numStr}" loading="lazy" />
+        <div class="masonry-item-bar">
+          <span class="masonry-heart-tag">#${numStr} ${icon}</span>
+          <span>20 • 10</span>
+        </div>
+      `;
+      item.addEventListener("click", () => openLightbox(idx));
+      galleryGrid.appendChild(item);
+    });
+  }
+
+  // 3. Instax Camera Interactive Snap
   function updateCameraStatus() {
-    const remaining = Math.max(0, photos.length - shotIndex);
-    if (filmCountEl) filmCountEl.textContent = remaining;
-
+    if (filmCountEl) filmCountEl.textContent = photos.length;
     if (lensPreviewImg && photos.length) {
-      const nextPhoto = photos[shotIndex % photos.length];
-      lensPreviewImg.src = nextPhoto.src;
+      lensPreviewImg.src = photos[shotIndex % photos.length].src;
     }
-
     if (shootCtaBtn) {
-      if (shotIndex < photos.length) {
-        shootCtaBtn.textContent = `📸 Bấm chụp tấm tiếp theo (${shotIndex + 1}/${photos.length})`;
-      } else {
-        shootCtaBtn.textContent = "🔄 Chụp lại từ tấm đầu tiên";
-      }
+      const nextNum = (shotIndex % photos.length) + 1;
+      shootCtaBtn.textContent = `📸 Bấm chụp rửa ảnh (#${nextNum}/${photos.length})`;
     }
   }
 
@@ -375,15 +377,11 @@
     if (isShooting || !photos.length) return;
     isShooting = true;
 
-    if (shotIndex >= photos.length) {
-      shotIndex = 0;
-    }
-
-    const idx = shotIndex;
+    const idx = shotIndex % photos.length;
     const photo = photos[idx];
+    const numStr = String(idx + 1).padStart(2, "0");
     shotIndex++;
 
-    // 1. Sound + Flash
     playShutterSound();
     if (instaxFlash) {
       instaxFlash.classList.add("flashing");
@@ -393,9 +391,8 @@
     const screenFlash = document.createElement("div");
     screenFlash.className = "camera-screen-flash";
     document.body.appendChild(screenFlash);
-    setTimeout(() => screenFlash.remove(), 560);
+    setTimeout(() => screenFlash.remove(), 520);
 
-    // 2. Eject & Develop in Tray
     if (ejectZone && developingCard && developingImg) {
       ejectZone.classList.add("active");
       developingCard.style.animation = "none";
@@ -404,27 +401,18 @@
 
       developingImg.className = "";
       developingImg.src = photo.src;
-      developingImg.style.objectFit = photo.fit || "cover";
-      developingImg.style.objectPosition = photo.position || "center center";
       void developingImg.offsetWidth;
       developingImg.classList.add("developing");
 
-      if (developingCaption) developingCaption.textContent = photo.caption || "";
-      if (developingDate) developingDate.textContent = photo.date || "";
+      if (developingIndexBadge) {
+        developingIndexBadge.textContent = `Khoảnh khắc #${numStr} 💕`;
+      }
       if (developingOverlay) {
         developingOverlay.classList.add("visible");
-        setTimeout(() => developingOverlay.classList.remove("visible"), 1350);
+        setTimeout(() => developingOverlay.classList.remove("visible"), 1300);
       }
 
       developingCard.onclick = () => openLightbox(idx);
-    }
-
-    // 3. Pin onto Album Wall if not yet added
-    if (!printedSet.has(idx) && galleryGrid) {
-      printedSet.add(idx);
-      if (albumWallHeader) albumWallHeader.style.display = "block";
-      const card = createPolaroidCard(photo, idx, true);
-      galleryGrid.appendChild(card);
     }
 
     updateCameraStatus();
@@ -432,37 +420,46 @@
 
     setTimeout(() => {
       isShooting = false;
-    }, 650);
-  }
-
-  function printAllPhotos() {
-    if (!galleryGrid) return;
-    if (albumWallHeader) albumWallHeader.style.display = "block";
-    photos.forEach((photo, idx) => {
-      if (!printedSet.has(idx)) {
-        printedSet.add(idx);
-        const card = createPolaroidCard(photo, idx, true);
-        galleryGrid.appendChild(card);
-      }
-    });
-    shotIndex = photos.length;
-    updateCameraStatus();
-    spawnKissHearts(16);
+    }, 600);
   }
 
   if (shutterBtn) shutterBtn.addEventListener("click", shootNextPhoto);
   if (instaxLens) instaxLens.addEventListener("click", shootNextPhoto);
   if (shootCtaBtn) shootCtaBtn.addEventListener("click", shootNextPhoto);
-  if (printAllBtn) printAllBtn.addEventListener("click", printAllPhotos);
 
   updateCameraStatus();
 
+  // 4. Lightbox Navigation (Buttons + Touch Swipe + Keyboard)
   document.getElementById("lightbox-close").addEventListener("click", closeLightbox);
   document.getElementById("lightbox-prev").addEventListener("click", () => openLightbox(currentPhotoIdx - 1));
   document.getElementById("lightbox-next").addEventListener("click", () => openLightbox(currentPhotoIdx + 1));
   lightbox.addEventListener("click", (e) => {
     if (e.target === lightbox) closeLightbox();
   });
+
+  window.addEventListener("keydown", (e) => {
+    if (!lightbox.classList.contains("active")) return;
+    if (e.key === "ArrowLeft") openLightbox(currentPhotoIdx - 1);
+    if (e.key === "ArrowRight") openLightbox(currentPhotoIdx + 1);
+    if (e.key === "Escape") closeLightbox();
+  });
+
+  let touchStartX = 0;
+  lightbox.addEventListener("touchstart", (e) => {
+    if (e.changedTouches && e.changedTouches.length) {
+      touchStartX = e.changedTouches[0].clientX;
+    }
+  }, { passive: true });
+
+  lightbox.addEventListener("touchend", (e) => {
+    if (e.changedTouches && e.changedTouches.length) {
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(dx) > 45) {
+        if (dx < 0) openLightbox(currentPhotoIdx + 1);
+        else openLightbox(currentPhotoIdx - 1);
+      }
+    }
+  }, { passive: true });
 
   // ==========================================================================
   // 5. RUNAWAY "KHÔNG" BUTTON MINI-GAME ("EM CÓ YÊU ANH KHÔNG?")
