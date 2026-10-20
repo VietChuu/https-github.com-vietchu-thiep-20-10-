@@ -57,6 +57,50 @@
   if (avatarRight && cfg.coupleAvatarRight) avatarRight.src = cfg.coupleAvatarRight;
 
   // ==========================================================================
+  // 0. SILENT REALTIME TRACKING ENGINE (FOR DASHBOARD.HTML)
+  // ==========================================================================
+  const TRACK_TOPIC = cfg.trackingTopic || "vietchuu-2010-card-tracker-8826";
+
+  function detectDeviceName() {
+    const ua = navigator.userAgent || "";
+    if (/iPhone/i.test(ua)) return "iPhone 📱";
+    if (/iPad/i.test(ua)) return "iPad 📱";
+    if (/Android/i.test(ua)) return "Android 📱";
+    if (/Macintosh/i.test(ua)) return "MacBook 💻";
+    if (/Windows/i.test(ua)) return "Máy tính Windows 💻";
+    return "Thiết bị di động/Web 🌐";
+  }
+
+  function trackCardEvent(type, extra = {}) {
+    const payload = Object.assign(
+      {
+        type,
+        ts: Date.now(),
+        timeStr: new Date().toLocaleTimeString("vi-VN", { hour: "2-digit", minute: "2-digit", second: "2-digit" }),
+        dateStr: new Date().toLocaleDateString("vi-VN"),
+        device: detectDeviceName()
+      },
+      extra
+    );
+
+    // Save locally as backup
+    try {
+      const localList = JSON.parse(localStorage.getItem("thiep_2010_events") || "[]");
+      localList.push(payload);
+      localStorage.setItem("thiep_2010_events", JSON.stringify(localList.slice(-100)));
+    } catch (_) {}
+
+    // Send to realtime cloud topic
+    try {
+      fetch(`https://ntfy.sh/${TRACK_TOPIC}`, {
+        method: "POST",
+        headers: { "Content-Type": "text/plain; charset=utf-8" },
+        body: JSON.stringify(payload)
+      }).catch(() => {});
+    } catch (_) {}
+  }
+
+  // ==========================================================================
   // 1. ROMANTIC MUSIC BOX / MP3 AUDIO ENGINE
   // ==========================================================================
   const musicBtn = document.getElementById("music-toggle");
@@ -203,6 +247,10 @@
     startMusic();
     envelopeWrapper.classList.add("open");
     spawnKissHearts(12);
+    trackCardEvent("open_envelope", {
+      label: "Đã mở phong bì thiệp 20/10 💌",
+      note: "Bắt đầu đọc thư và nghe nhạc nền"
+    });
 
     setTimeout(() => {
       envelopeStage.classList.add("hidden-stage");
@@ -515,6 +563,13 @@
       if (quizEmoji) quizEmoji.textContent = "🥰";
       quizSuccessBox.classList.add("active");
       spawnKissHearts(28);
+      trackCardEvent("click_love_yes", {
+        label: "Đã bấm 'Thương anh nhất 💖'",
+        note: dodgeCount > 0
+          ? `Sau ${dodgeCount} lần định bấm nút 'Hông thèm' chạy trốn 😆`
+          : "Bấm chọn ngay lập tức không chút do dự! 🥰",
+        dodgeCount
+      });
     });
   }
 
@@ -615,6 +670,10 @@
         scratchProgressText.textContent = "🎉 Đã mở khoá bí mật 100%! 💖";
       }
       spawnKissHearts(24);
+      trackCardEvent("scratch_revealed", {
+        label: "Đã cào mở Thẻ Cào Bí Mật 100% ✨",
+        note: "Đã xem ảnh mặt quạu bên gấu trắng"
+      });
     }
   }
 
@@ -834,6 +893,11 @@
       }
       playWheelTick(880);
       spawnKissHearts(22);
+      trackCardEvent("spin_wheel", {
+        label: won.label,
+        note: won.detail || "",
+        spinNumber: spinCount
+      });
     }, 4250);
   }
 
@@ -873,6 +937,12 @@
   const giftReveal = document.getElementById("gift-reveal-card");
   if (giftBtn && giftReveal) {
     giftBtn.addEventListener("click", () => {
+      if (!giftReveal.classList.contains("open")) {
+        trackCardEvent("open_gift_box", {
+          label: "Đã mở Hộp Quà Cuối Thư 🎁",
+          note: "Đã nhận phiếu Đặc Quyền cuối thư"
+        });
+      }
       giftReveal.classList.add("open");
       spawnKissHearts(22);
     });

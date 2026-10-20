@@ -138,6 +138,9 @@ window.CARD_CONFIG = {
   // 7. Đường dẫn nhạc nền (để trống sẽ dùng giai điệu Music Box lãng mạn tích hợp sẵn)
   customMusicUrl: "",
 
-  // 8. Đường dẫn trang thiệp sau khi deploy (dùng để tạo QR)
-  deployedUrl: "https://vietchuu.github.io/https-github.com-vietchu-thiep-20-10-/"
+  // 10. Đường dẫn trang thiệp sau khi deploy (dùng để tạo QR)
+  deployedUrl: "https://vietchuu.github.io/https-github.com-vietchu-thiep-20-10-/",
+
+  // 11. Kênh Realtime Tracking cho Dashboard
+  trackingTopic: "vietchuu-2010-card-tracker-8826"
 };

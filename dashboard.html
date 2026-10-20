@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>📊 Dashboard Theo Dõi Thiệp 20/10 — Realtime</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --rose-primary: #ff4d6d;
+      --rose-deep: #c9184a;
+      --wine-dark: #4a1525;
+      --bg-soft: #fff5f7;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      min-height: 100vh;
+      font-family: 'Be Vietnam Pro', sans-serif;
+      background: linear-gradient(135deg, #fff0f3 0%, #ffe5ec 100%);
+      color: var(--wine-dark);
+      padding: 28px 16px 60px;
+    }
+    .wrap {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .top-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 24px;
+      background: #ffffff;
+      padding: 20px 24px;
+      border-radius: 22px;
+      box-shadow: 0 12px 32px rgba(164, 19, 60, 0.1);
+      border: 1px solid #ffccd5;
+    }
+    .title-group h1 {
+      font-size: 1.4rem;
+      color: var(--wine-dark);
+      margin-bottom: 4px;
+    }
+    .live-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #1b7a43;
+      background: #e6f8ed;
+      padding: 5px 12px;
+      border-radius: 999px;
+    }
+    .live-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #22c55e;
+      animation: blinkDot 1.4s infinite;
+    }
+    @keyframes blinkDot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.25); }
+    }
+    .action-btns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .btn {
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: none;
+      font-family: inherit;
+      font-size: 0.86rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.2s ease;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-refresh {
+      background: #fff0f3;
+      color: var(--rose-deep);
+      border: 1px solid #ffb3c6;
+    }
+    .btn-clear {
+      background: #fee2e2;
+      color: #b91c1c;
+      border: 1px solid #fca5a5;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--rose-primary), var(--rose-deep));
+      color: #fff;
+    }
+
+    /* Stats Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 16px;
+      margin-bottom: 26px;
+    }
+    .stat-card {
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 10px 26px rgba(164, 19, 60, 0.08);
+      border: 1px solid #ffe5ec;
+    }
+    .stat-card.highlight {
+      background: linear-gradient(135deg, #ff4d6d 0%, #c9184a 100%);
+      color: #ffffff;
+      border: none;
+    }
+    .stat-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      opacity: 0.85;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .stat-value {
+      font-size: 1.45rem;
+      font-weight: 800;
+      line-height: 1.3;
+    }
+    .stat-sub {
+      font-size: 0.8rem;
+      margin-top: 6px;
+      opacity: 0.85;
+    }
+
+    /* Sections */
+    .panel {
+      background: #ffffff;
+      border-radius: 22px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 12px 30px rgba(164, 19, 60, 0.08);
+      border: 1px solid #ffccd5;
+    }
+    .panel-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .spin-list {
+      display: grid;
+      gap: 12px;
+    }
+    .spin-item {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 16px 18px;
+      border-radius: 16px;
+      background: #fff5f7;
+      border-left: 5px solid var(--rose-deep);
+    }
+    .spin-prize {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--rose-deep);
+    }
+    .spin-detail {
+      font-size: 0.88rem;
+      color: var(--wine-dark);
+      margin-top: 3px;
+    }
+    .spin-meta {
+      font-size: 0.8rem;
+      color: #8a4f60;
+      font-weight: 600;
+      text-align: right;
+    }
+
+    .timeline-list {
+      display: grid;
+      gap: 10px;
+    }
+    .timeline-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 16px;
+      border-radius: 12px;
+      background: #fcf8f9;
+      border: 1px solid #ffe5ec;
+      font-size: 0.9rem;
+    }
+    .empty-state {
+      text-align: center;
+      padding: 28px 16px;
+      color: #8a4f60;
+      font-size: 0.92rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="top-bar">
+      <div class="title-group">
+        <h1>📊 Dashboard Theo Dõi Thiệp 20/10</h1>
+        <div class="live-pill">
+          <span class="live-dot"></span>
+          <span id="conn-status">Đang lắng nghe Realtime — Tự động nhảy số khi cô ấy thao tác</span>
+        </div>
+      </div>
+
+      <div class="action-btns">
+        <button id="refresh-btn" class="btn btn-refresh" type="button">🔄 Tải lại</button>
+        <button id="clear-btn" class="btn btn-clear" type="button">🗑️ Xoá lịch sử Test</button>
+        <a href="index.html" class="btn btn-primary">💌 Mở trang thiệp</a>
+      </div>
+    </header>
+
+    <!-- 4 Summary Cards -->
+    <section class="stats-grid">
+      <div class="stat-card highlight">
+        <div class="stat-label">🎡 Ô Vòng Quay Mới Nhất</div>
+        <div id="latest-prize-val" class="stat-value">Chưa quay</div>
+        <div id="latest-prize-time" class="stat-sub">Đang chờ cô ấy bấm QUAY...</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-label">🎯 Tổng Số Lần Quay</div>
+        <div id="total-spins-val" class="stat-value">0 lần</div>
+        <div id="total-spins-sub" class="stat-sub">Vòng quay đặc quyền 20/10</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-label">💌 Mở Phong Bì Thiệp</div>
+        <div id="total-opens-val" class="stat-value">0 lần</div>
+        <div id="latest-device-sub" class="stat-sub">Chưa mở thiệp</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-label">💖 Bấm "Thương Anh Nhất"</div>
+        <div id="love-yes-val" class="stat-value">Chưa bấm</div>
+        <div id="love-dodge-sub" class="stat-sub">Mini-game nút chạy trốn</div>
+      </div>
+    </section>
+
+    <!-- Highlighted Wheel Spins Panel -->
+    <section class="panel">
+      <div class="panel-title">
+        <span>🎡 Danh sách các ô cô ấy đã quay trúng</span>
+      </div>
+      <div id="spin-list" class="spin-list">
+        <div class="empty-state">Chưa có lượt quay nào. Khi cô ấy bấm QUAY trên thiệp, kết quả sẽ hiện ngay tại đây! ✨</div>
+      </div>
+    </section>
+
+    <!-- Full Activity Timeline -->
+    <section class="panel">
+      <div class="panel-title">
+        <span>🕒 Nhật ký tương tác chi tiết trên thiệp</span>
+      </div>
+      <div id="timeline-list" class="timeline-list">
+        <div class="empty-state">Chưa có tương tác nào được ghi nhận.</div>
+      </div>
+    </section>
+  </div>
+
+  <script src="src/config.js"></script>
+  <script>
+    (function () {
+      const cfg = window.CARD_CONFIG || {};
+      const TOPIC = cfg.trackingTopic || "vietchuu-2010-card-tracker-8826";
+      let allEvents = [];
+      let resetAfterTs = Number(localStorage.getItem("thiep_2010_reset_ts") || "0");
+
+      function mergeEvent(ev) {
+        if (!ev || !ev.type || !ev.ts) return;
+        if (ev.type === "reset_log") {
+          if (ev.ts > resetAfterTs) {
+            resetAfterTs = ev.ts;
+            localStorage.setItem("thiep_2010_reset_ts", String(resetAfterTs));
+          }
+          renderDashboard();
+          return;
+        }
+        const exists = allEvents.some((item) => item.ts === ev.ts && item.type === ev.type);
+        if (!exists) {
+          allEvents.push(ev);
+          allEvents.sort((a, b) => b.ts - a.ts);
+          renderDashboard();
+        }
+      }
+
+      function renderDashboard() {
+        const visible = allEvents.filter((e) => e.ts > resetAfterTs);
+        const spins = visible.filter((e) => e.type === "spin_wheel");
+        const opens = visible.filter((e) => e.type === "open_envelope");
+        const yesClicks = visible.filter((e) => e.type === "click_love_yes");
+
+        // 1. Latest spin card
+        const latestPrizeEl = document.getElementById("latest-prize-val");
+        const latestPrizeTimeEl = document.getElementById("latest-prize-time");
+        if (spins.length > 0) {
+          latestPrizeEl.textContent = spins[0].label || "Đã quay trúng";
+          latestPrizeTimeEl.textContent = `Lúc ${spins[0].timeStr || ""} (${spins[0].device || ""})`;
+        } else {
+          latestPrizeEl.textContent = "Chưa quay";
+          latestPrizeTimeEl.textContent = "Đang chờ cô ấy bấm QUAY...";
+        }
+
+        // 2. Total spins
+        document.getElementById("total-spins-val").textContent = `${spins.length} lần`;
+        document.getElementById("total-spins-sub").textContent = spins.length
+          ? `Mới nhất: ${spins[0].label}`
+          : "Vòng quay đặc quyền 20/10";
+
+        // 3. Opens
+        document.getElementById("total-opens-val").textContent = `${opens.length} lần`;
+        document.getElementById("latest-device-sub").textContent = opens.length
+          ? `${opens[0].device} • ${opens[0].timeStr}`
+          : "Chưa mở thiệp";
+
+        // 4. Love Yes
+        if (yesClicks.length > 0) {
+          document.getElementById("love-yes-val").textContent = "Đã bấm 💖";
+          document.getElementById("love-dodge-sub").textContent = yesClicks[0].note || "";
+        } else {
+          document.getElementById("love-yes-val").textContent = "Chưa bấm";
+          document.getElementById("love-dodge-sub").textContent = "Mini-game nút chạy trốn";
+        }
+
+        // Render Spin List
+        const spinListEl = document.getElementById("spin-list");
+        if (spins.length === 0) {
+          spinListEl.innerHTML = `<div class="empty-state">Chưa có lượt quay nào. Khi cô ấy bấm QUAY trên thiệp, kết quả sẽ hiện ngay tại đây! ✨</div>`;
+        } else {
+          spinListEl.innerHTML = spins
+            .map(
+              (s, idx) => `
+              <div class="spin-item">
+                <div>
+                  <div class="spin-prize">🎯 Lần #${spins.length - idx}: ${s.label || ""}</div>
+                  <div class="spin-detail">${s.note || ""}</div>
+                </div>
+                <div class="spin-meta">
+                  <div>🕒 ${s.timeStr || ""} - ${s.dateStr || ""}</div>
+                  <div>${s.device || ""}</div>
+                </div>
+              </div>
+            `
+            )
+            .join("");
+        }
+
+        // Render Full Timeline
+        const timelineEl = document.getElementById("timeline-list");
+        if (visible.length === 0) {
+          timelineEl.innerHTML = `<div class="empty-state">Chưa có tương tác nào được ghi nhận.</div>`;
+        } else {
+          timelineEl.innerHTML = visible
+            .map(
+              (ev) => `
+              <div class="timeline-row">
+                <div>
+                  <strong>${ev.label || ev.type}</strong>
+                  ${ev.note ? `<div style="font-size:0.82rem;color:#8a4f60;margin-top:2px;">${ev.note}</div>` : ""}
+                </div>
+                <div style="text-align:right;font-size:0.78rem;color:#8a4f60;white-space:nowrap;">
+                  <div>${ev.timeStr || ""}</div>
+                  <div>${ev.device || ""}</div>
+                </div>
+              </div>
+            `
+            )
+            .join("");
+        }
+      }
+
+      // Load local events first
+      function loadLocalBackup() {
+        try {
+          const localList = JSON.parse(localStorage.getItem("thiep_2010_events") || "[]");
+          localList.forEach(mergeEvent);
+        } catch (_) {}
+      }
+
+      // Fetch historical cloud events
+      async function fetchCloudHistory() {
+        try {
+          const resp = await fetch(`https://ntfy.sh/${TOPIC}/json?poll=1&since=all`);
+          const text = await resp.text();
+          const lines = text.split("\n").map((l) => l.trim()).filter(Boolean);
+          lines.forEach((line) => {
+            try {
+              const wrapper = JSON.parse(line);
+              if (wrapper && wrapper.message) {
+                const ev = JSON.parse(wrapper.message);
+                mergeEvent(ev);
+              }
+            } catch (_) {}
+          });
+        } catch (_) {}
+      }
+
+      // Subscribe to realtime SSE stream
+      function subscribeRealtime() {
+        try {
+          const es = new EventSource(`https://ntfy.sh/${TOPIC}/sse`);
+          es.onmessage = (e) => {
+            try {
+              const wrapper = JSON.parse(e.data);
+              if (wrapper && wrapper.message) {
+                const ev = JSON.parse(wrapper.message);
+                mergeEvent(ev);
+              }
+            } catch (_) {}
+          };
+        } catch (_) {}
+      }
+
+      document.getElementById("refresh-btn").addEventListener("click", () => {
+        loadLocalBackup();
+        fetchCloudHistory();
+      });
+
+      document.getElementById("clear-btn").addEventListener("click", async () => {
+        const now = Date.now();
+        resetAfterTs = now;
+        localStorage.setItem("thiep_2010_reset_ts", String(now));
+        localStorage.removeItem("thiep_2010_events");
+        renderDashboard();
+        try {
+          await fetch(`https://ntfy.sh/${TOPIC}`, {
+            method: "POST",
+            headers: { "Content-Type": "text/plain; charset=utf-8" },
+            body: JSON.stringify({ type: "reset_log", ts: now })
+          });
+        } catch (_) {}
+      });
+
+      loadLocalBackup();
+      fetchCloudHistory();
+      subscribeRealtime();
+      renderDashboard();
+    })();
+  </script>
+</body>
+</html>
