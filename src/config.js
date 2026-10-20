@@ -12,7 +12,7 @@ window.CARD_CONFIG = {
   // 2. Đồng hồ đếm ngày yêu (Định dạng: YYYY-MM-DD)
   // Sửa ngày bắt đầu của 2 bạn tại đây:
   loveStartDate: "2026-03-25",
-  loveStartLabel: "✨ Bắt đầu nhắn tin từ ngày 25/03/2026 ✨",
+  loveStartLabel: "✨ Bên nhau từ ngày 25/03/2026 ✨",
   loveCounterTitle: "Hành Trình Bên Nhau Của Chúng Mình",
   loveCounterSubtitle: "Từng giây phút trôi qua bên em đều là những kỷ niệm vô giá",
   coupleAvatarLeft: "assets/photos/1792466461944_2199372916196262329_2672750711596410923_h.jpg",
