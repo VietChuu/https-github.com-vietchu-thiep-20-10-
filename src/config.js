@@ -9,7 +9,15 @@ window.CARD_CONFIG = {
   dateText: "20 • 10 • 2026",
   badgeText: "Happy Vietnamese Women's Day",
 
-  // 2. Tiêu đề & Nội dung bức thư
+  // 2. Đồng hồ đếm ngày yêu (Định dạng: YYYY-MM-DD)
+  // Sửa ngày bắt đầu yêu của 2 bạn tại đây:
+  loveStartDate: "2024-02-14",
+  loveCounterTitle: "Hành Trình Bên Nhau Của Chúng Mình",
+  loveCounterSubtitle: "Từng giây phút trôi qua bên em đều là những kỷ niệm vô giá",
+  coupleAvatarLeft: "assets/photos/1792466461944_2199372916196262329_2672750711596410923_h.jpg",
+  coupleAvatarRight: "assets/photos/1792466461969_2199372916196262329_2672750711596410923_h.jpg",
+
+  // 3. Tiêu đề & Nội dung bức thư
   envelopeTitle: "Gửi Người Con Gái Anh Thương",
   envelopeSubtitle: "Chạm vào phong bì để mở món quà nhỏ từ anh nhé",
   letterGreeting: "Gửi em — cô gái tuyệt vời nhất của anh,",
@@ -20,7 +28,22 @@ window.CARD_CONFIG = {
   ],
   letterClosing: "Trọn đời thương em,",
 
-  // 3. Thư viện ảnh kỷ niệm Polaroid của 2 bạn
+  // 4. Mini-game tương tác "Em có yêu anh không?"
+  loveQuestionTitle: "Câu Hỏi Quan Trọng Ngày 20/10 😳",
+  loveQuestionPrompt: "Trả lời thật lòng nha: Em có thương và yêu anh nhiều không?",
+  loveYesText: "Yêu anh nhất trên đời 💖",
+  loveNoTexts: [
+    "Hông thèm đâu 😜",
+    "Ơ kìa, bấm nhầm hả? 🥺",
+    "Nút này bị hư rồi! 😭",
+    "Đừng bấm nút này mà 😤",
+    "Bấm nút màu hồng bên kia kìa! 💕",
+    "Chạy đằng trời cũng không thoát đâu 🏃‍♂️💨",
+    "Thôi đừng dối lòng nữa 😘"
+  ],
+  loveSuccessMessage: "Anh biết ngay mà! Anh cũng yêu công chúa của anh nhiều gấp vạn lần! Hôm nay đi chơi anh chiều em hết nấc nha! 🥰💖💐",
+
+  // 5. Thư viện ảnh kỷ niệm Polaroid của 2 bạn
   galleryTitle: "Khoảnh Khắc Của Chúng Mình",
   gallerySubtitle: "Mỗi bức ảnh là một mảnh ghép hạnh phúc khi có em bên cạnh (Chạm vào ảnh để xem rõ hơn nhé)",
   photos: [
@@ -69,14 +92,14 @@ window.CARD_CONFIG = {
     }
   ],
 
-  // 4. Lời nhắn bất ngờ cuối trang
+  // 6. Lời nhắn bất ngờ cuối trang
   secretMessageTitle: "Món Quà Nhỏ Dành Riêng Cho Em 🎁",
   secretMessageBody: "Hôm nay em chỉ việc thật xinh đẹp và mỉm cười thôi nhé! Mọi thứ còn lại — từ hoa, quà cho tới những cái ôm thật chặt — cứ để anh lo! 💐💖",
   secretVoucherText: "VOUCHER TÌNH YÊU: 1 buổi hẹn hò lãng mạn & bất kỳ món ăn nào em thích (Hạn sử dụng: Mãi mãi)",
 
-  // 5. Đường dẫn nhạc nền (để trống sẽ dùng giai điệu Music Box lãng mạn tích hợp sẵn)
+  // 7. Đường dẫn nhạc nền (để trống sẽ dùng giai điệu Music Box lãng mạn tích hợp sẵn)
   customMusicUrl: "",
 
-  // 6. Đường dẫn trang thiệp sau khi deploy (dùng để tạo QR)
+  // 8. Đường dẫn trang thiệp sau khi deploy (dùng để tạo QR)
   deployedUrl: "https://vietchuu.github.io/https-github.com-vietchu-thiep-20-10-/"
 };
