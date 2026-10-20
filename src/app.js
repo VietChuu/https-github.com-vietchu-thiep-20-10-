@@ -219,7 +219,7 @@
     const m = String(startDate.getMonth() + 1).padStart(2, "0");
     const y = startDate.getFullYear();
     if (startBadgeEl) {
-      startBadgeEl.textContent = `✨ Bên nhau từ ngày ${d}/${m}/${y} ✨`;
+      startBadgeEl.textContent = cfg.loveStartLabel || `✨ Bắt đầu nhắn tin từ ngày ${d}/${m}/${y} ✨`;
     }
 
     function updateLoveCounter() {
